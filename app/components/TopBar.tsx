@@ -55,7 +55,7 @@ export function TopBar() {
           </div>
 
           <div className="d-flex align-items-center">
-            <div className="collapse navbar-collapse">
+            <div>
               <ul className="navbar-nav">
                 <li className="nav-item dropdown">
                   <a
