@@ -1,20 +1,20 @@
 'use client'
 
-import { useState } from "react"
+import { SetStateAction, useState } from "react"
 
 export default function Page() {
     const [query, setQuery] = useState('');
-    const handleChange = (e) => {
+    const handleChange = (e: { target: { value: SetStateAction<string>; }; }) => {
         setQuery(e.target.value);
     }
     const members = [
-        {"name": "Eliel", "function": "Ministro", "icon": "people.png"},
-        {"name": "Iasmini", "function": "Vocal", "icon": "mic.png"},
-        {"name": "Anna C.", "function": "Vocal", "icon": "mic.png"},
-        {"name": "Uanderson", "function": "Teclado", "icon": ""},
-        {"name": "Gegê", "function": "Baixo", "icon": ""},
-        {"name": "Gabriel", "function": "Bateria", "icon": "drums.png"},
-        {"name": "Samuel", "function": "Sonoplastia", "icon": "slider.png"},
+        {"id": 1, "name": "Eliel", "function": "Ministro", "icon": "people.png"},
+        {"id": 2, "name": "Iasmini", "function": "Vocal", "icon": "mic.png"},
+        {"id": 3, "name": "Anna C.", "function": "Vocal", "icon": "mic.png"},
+        {"id": 4, "name": "Uanderson", "function": "Teclado", "icon": ""},
+        {"id": 5, "name": "Gegê", "function": "Baixo", "icon": ""},
+        {"id": 6, "name": "Gabriel", "function": "Bateria", "icon": "drums.png"},
+        {"id": 7, "name": "Samuel", "function": "Sonoplastia", "icon": "slider.png"},
     ]
 
     const searchFilter = (array: any[]) => {
@@ -45,7 +45,7 @@ export default function Page() {
                             <div className="accordion-body">
                                 <div className="row">
                                     {filtered.map((member) => (
-                                        <div className="col">
+                                        <div className="col" key={member.id}>
                                             <div className="card space-up">
                                                 <h5 className="card-header">
                                                     <img src={`/images/${member.icon}`} />
