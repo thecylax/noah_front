@@ -19,7 +19,17 @@ export function TopBar() {
                 <a className="nav-link" href="/members">Membros</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/members">Calendário</a>
+                <a className="nav-link" href="#">Calendário</a>
+              </li>
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Grupos
+                </a>
+                <ul className="dropdown-menu">
+                  <li><a className="dropdown-item" href="/groups/praise">Louvor</a></li>
+                  <li><a className="dropdown-item" href="#">Diaconato</a></li>
+                  <li><a className="dropdown-item" href="#">Kids</a></li>
+                </ul>
               </li>
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

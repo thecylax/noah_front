@@ -55,7 +55,6 @@ export default async function Page() {
       {/* <Suspense fallback={<div>Loading...</div>}>
         <Users promise={usersData} />
       </Suspense> */}
-      <p>Oi</p>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Nome</label>
         <input type="text" id="name" name="foo" required />
