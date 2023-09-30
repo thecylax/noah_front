@@ -2,11 +2,6 @@ body {
   background-image: linear-gradient(to right, #1B1464, #93278F);
 }
 
-#carouselMain {
-  margin: auto;
-  width: 50%;
-}
-
 .copyright {
   background-color: rgba(0, 0, 0, 0.2);
 }
