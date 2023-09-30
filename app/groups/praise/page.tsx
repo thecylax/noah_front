@@ -46,9 +46,10 @@ export default function Page() {
     return (
         <>
             <div className="container-fluid">
+                <button className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">Cadastrar música</button>
                 <div className="row">
-                    <div className="col">
-                        <div className="card space-up h-100">
+                    <div className="col-md">
+                        <div className="card mt-2">
                             <div className="card-body">
                                 <h5 className="card-title">
                                     Celebração
@@ -72,14 +73,14 @@ export default function Page() {
                                 </ul>
                             </div>
                             <div className="card-footer text-body-secondary">
-                                <a href="#" data-bs-toggle="tooltip" data-bs-title="Adicionar nova música">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#addModal">
                                     <i className="bi bi-plus-circle-fill fs-1"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <div className="col">
-                        <div className="card space-up h-100">
+                    <div className="col-md">
+                        <div className="card mt-2">
                             <div className="card-body">
                                 <h5 className="card-title">
                                     Transição
@@ -103,14 +104,14 @@ export default function Page() {
                                 </ul>
                             </div>
                             <div className="card-footer text-body-secondary">
-                                <a href="#">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#addModal">
                                     <i className="bi bi-plus-circle-fill fs-1"></i>
                                 </a>
                             </div>                            
                         </div>
                     </div>
-                    <div className="col">
-                        <div className="card space-up h-100">
+                    <div className="col-md">
+                        <div className="card mt-2">
                             <div className="card-body">
                                 <h5 className="card-title">
                                     Adoração
@@ -142,12 +143,12 @@ export default function Page() {
                     </div>
                 </div>
 
-                {/* modal */}
-                <div className="modal fade" id="addModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                {/* modal cadastro musica*/}
+                <div className="modal fade" id="createModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h1 className="modal-title fs-5" id="staticBackdropLabel">Adicionar música</h1>
+                                <h1 className="modal-title fs-5" id="staticBackdropLabel">Cadastrar música</h1>
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div className="modal-body">
@@ -173,6 +174,32 @@ export default function Page() {
                                         <input type="text" className="form-control" placeholder="Link Cifra" aria-label="Cifra" aria-describedby="basic-addon5" />
                                     </div>
                                 </form>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                <button type="button" className="btn btn-primary">Salvar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* modal adicionar musica*/}
+                <div className="modal fade" id="addModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h1 className="modal-title fs-5" id="staticBackdropLabel">Incluir música</h1>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div className="modal-body">
+                                <ul className="list-group list-group-flush">
+                                    {musics.celebracao.map((music) => (
+                                        <li className="list-group-item" key={music.id}>
+                                            <input type="checkbox" className="form-check-input me-1" value={""} id={`checkBox${music.id}`} />
+                                            <label htmlFor={`checkBox${music.id}`} className="form-check-label"><strong>{music.name}</strong> - <i>{music.author}</i></label>
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>

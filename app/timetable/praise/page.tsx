@@ -45,7 +45,7 @@ export default function Page() {
                             <div className="accordion-body">
                                 <div className="row">
                                     {filtered.map((member) => (
-                                        <div className="col" key={member.id}>
+                                        <div className="col-md" key={member.id}>
                                             <div className="card mt-2">
                                                 <h5 className="card-header h-100">
                                                     <p><img src={`/images/${member.icon}`} /></p>
@@ -54,7 +54,6 @@ export default function Page() {
                                                 <div className="card-body">
                                                     <h5 className="card-title">{member.name}</h5>
                                                     <p className="card-text">Some extra text.</p>
-                                                    {/* <a href="" className="btn btn-primary">Go somewhere</a> */}
                                                 </div>
                                             </div>
                                         </div>
@@ -74,7 +73,7 @@ export default function Page() {
                             <div className="accordion-body">
                                 <div className="row">
                                     {filtered.map((member) => (
-                                        <div className="col" key={member.id}>
+                                        <div className="col-md" key={member.id}>
                                             <div className="card mt-2">
                                                 <h5 className="card-header h-100">
                                                     <p><img src={`/images/${member.icon}`} /></p>
@@ -83,7 +82,6 @@ export default function Page() {
                                                 <div className="card-body">
                                                     <h5 className="card-title">{member.name}</h5>
                                                     <p className="card-text">Some extra text.</p>
-                                                    {/* <a href="" className="btn btn-primary">Go somewhere</a> */}
                                                 </div>
                                             </div>
                                         </div>
@@ -102,7 +100,7 @@ export default function Page() {
                             <div className="accordion-body">
                                 <div className="row">
                                     {filtered.map((member) => (
-                                        <div className="col" key={member.id}>
+                                        <div className="col-md" key={member.id}>
                                             <div className="card mt-2">
                                                 <h5 className="card-header h-100">
                                                     <p><img src={`/images/${member.icon}`} /></p>
@@ -111,7 +109,6 @@ export default function Page() {
                                                 <div className="card-body">
                                                     <h5 className="card-title">{member.name}</h5>
                                                     <p className="card-text">Some extra text.</p>
-                                                    {/* <a href="" className="btn btn-primary">Go somewhere</a> */}
                                                 </div>
                                             </div>
                                         </div>
