@@ -19,7 +19,8 @@ export default function Page() {
 
     const searchFilter = (array: any[]) => {
         return array.filter(
-            (el) => el.name.toLowerCase().includes(query)
+            // (el) => el.name.toLowerCase().includes(query)
+            (el) => el.name.includes(query)
         )
     }
     const filtered = searchFilter(members)
