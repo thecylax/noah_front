@@ -11,8 +11,8 @@ export default function Page() {
         {"id": 1, "name": "Eliel", "function": "Ministro", "icon": "people.png"},
         {"id": 2, "name": "Iasmini", "function": "Vocal", "icon": "mic.png"},
         {"id": 3, "name": "Anna C.", "function": "Vocal", "icon": "mic.png"},
-        {"id": 4, "name": "Uanderson", "function": "Teclado", "icon": ""},
-        {"id": 5, "name": "Gegê", "function": "Baixo", "icon": ""},
+        {"id": 4, "name": "Uanderson", "function": "Teclado", "icon": "keyboard.png"},
+        {"id": 5, "name": "Gegê", "function": "Baixo", "icon": "guitar.png"},
         {"id": 6, "name": "Gabriel", "function": "Bateria", "icon": "drums.png"},
         {"id": 7, "name": "Samuel", "function": "Sonoplastia", "icon": "slider.png"},
     ]
@@ -46,14 +46,14 @@ export default function Page() {
                                 <div className="row">
                                     {filtered.map((member) => (
                                         <div className="col" key={member.id}>
-                                            <div className="card space-up">
-                                                <h5 className="card-header">
-                                                    <img src={`/images/${member.icon}`} />
+                                            <div className="card mt-2">
+                                                <h5 className="card-header h-100">
+                                                    <p><img src={`/images/${member.icon}`} /></p>
                                                     {member.function}
                                                 </h5>
                                                 <div className="card-body">
                                                     <h5 className="card-title">{member.name}</h5>
-                                                    <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                                    <p className="card-text">Some extra text.</p>
                                                     {/* <a href="" className="btn btn-primary">Go somewhere</a> */}
                                                 </div>
                                             </div>
@@ -71,26 +71,25 @@ export default function Page() {
                         </button>
                         </h2>
                         <div id="panelsStayOpen-collapseTwo" className="accordion-collapse collapse">
-                        <div className="accordion-body">
-                            <div className="row">
-                                <div className="col">
-                                    <div className="card space-up">
-                                        <div className="card-header">
-                                            <img src="/images/drums.png" />
-                                            Bateria
+                            <div className="accordion-body">
+                                <div className="row">
+                                    {filtered.map((member) => (
+                                        <div className="col" key={member.id}>
+                                            <div className="card mt-2">
+                                                <h5 className="card-header h-100">
+                                                    <p><img src={`/images/${member.icon}`} /></p>
+                                                    {member.function}
+                                                </h5>
+                                                <div className="card-body">
+                                                    <h5 className="card-title">{member.name}</h5>
+                                                    <p className="card-text">Some extra text.</p>
+                                                    {/* <a href="" className="btn btn-primary">Go somewhere</a> */}
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className="card-body">
-                                            <h5 className="card-title">
-                                                Gabriel
-                                            </h5>
-                                            <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                            <a href="" className="btn btn-primary">Go somewhere</a>
-                                        </div>
-                                    </div>
+                                    ))}
                                 </div>
                             </div>
-                            
-                        </div>
                         </div>
                     </div>
                     <div className="accordion-item">
@@ -100,9 +99,25 @@ export default function Page() {
                         </button>
                         </h2>
                         <div id="panelsStayOpen-collapseThree" className="accordion-collapse collapse">
-                        <div className="accordion-body">
-                            <strong>This is the third items accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. Its also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                        </div>
+                            <div className="accordion-body">
+                                <div className="row">
+                                    {filtered.map((member) => (
+                                        <div className="col" key={member.id}>
+                                            <div className="card mt-2">
+                                                <h5 className="card-header h-100">
+                                                    <p><img src={`/images/${member.icon}`} /></p>
+                                                    {member.function}
+                                                </h5>
+                                                <div className="card-body">
+                                                    <h5 className="card-title">{member.name}</h5>
+                                                    <p className="card-text">Some extra text.</p>
+                                                    {/* <a href="" className="btn btn-primary">Go somewhere</a> */}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>                            
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -71,6 +71,11 @@ export default function Page() {
                                     ))}
                                 </ul>
                             </div>
+                            <div className="card-footer text-body-secondary">
+                                <a href="#" data-bs-toggle="tooltip" data-bs-title="Adicionar nova música">
+                                    <i className="bi bi-plus-circle-fill fs-1"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div className="col">
@@ -97,6 +102,11 @@ export default function Page() {
                                     ))}
                                 </ul>
                             </div>
+                            <div className="card-footer text-body-secondary">
+                                <a href="#">
+                                    <i className="bi bi-plus-circle-fill fs-1"></i>
+                                </a>
+                            </div>                            
                         </div>
                     </div>
                     <div className="col">
@@ -124,13 +134,54 @@ export default function Page() {
                                 </ul>
                             </div>
                             <div className="card-footer text-body-secondary">
-                                <a href="#">
-                                    <i className="bi bi-plus-circle-fill"></i>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#addModal">
+                                    <i className="bi bi-plus-circle-fill fs-1"></i>
                                 </a>
                             </div>                            
                         </div>
                     </div>
                 </div>
+
+                {/* modal */}
+                <div className="modal fade" id="addModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h1 className="modal-title fs-5" id="staticBackdropLabel">Adicionar música</h1>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div className="modal-body">
+                                <form>
+                                    <div className="input-group mb-3">
+                                        <span className="input-group-text" id="basic-addon1">@</span>
+                                        <input type="text" className="form-control" placeholder="Nome" aria-label="Username" aria-describedby="basic-addon1" />
+                                    </div>
+                                    <div className="input-group mb-3">
+                                        <span className="input-group-text" id="basic-addon2"><i className="bi bi-person-vcard"></i></span>
+                                        <input type="text" className="form-control" placeholder="Autor" aria-label="Autor" aria-describedby="basic-addon2" />
+                                    </div>
+                                    <div className="input-group mb-3">
+                                        <span className="input-group-text" id="basic-addon3"><i className="bi bi-spotify"></i></span>
+                                        <input type="text" className="form-control" placeholder="Link Spotify" aria-label="Spotify" aria-describedby="basic-addon3" />
+                                    </div>
+                                    <div className="input-group mb-3">
+                                        <span className="input-group-text" id="basic-addon4"><i className="bi bi-youtube"></i></span>
+                                        <input type="text" className="form-control" placeholder="Link Youtube" aria-label="Youtube" aria-describedby="basic-addon4" />
+                                    </div>
+                                    <div className="input-group mb-3">
+                                        <span className="input-group-text" id="basic-addon5"><i className="bi bi-music-note-beamed"></i></span>
+                                        <input type="text" className="form-control" placeholder="Link Cifra" aria-label="Cifra" aria-describedby="basic-addon5" />
+                                    </div>
+                                </form>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                <button type="button" className="btn btn-primary">Salvar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </>
     )
