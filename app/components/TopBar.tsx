@@ -29,6 +29,7 @@ export function TopBar() {
                   <li><a className="dropdown-item" href="/groups/praise">Louvor</a></li>
                   <li><a className="dropdown-item" href="#">Diaconato</a></li>
                   <li><a className="dropdown-item" href="#">Kids</a></li>
+                  <li><a className="dropdown-item" href="#">Empreendedores do Reino</a></li>
                 </ul>
               </li>
               <li className="nav-item dropdown">
