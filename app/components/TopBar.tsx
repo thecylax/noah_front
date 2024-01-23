@@ -52,6 +52,18 @@ export function TopBar() {
                   <li><a className="dropdown-item" href="#">Curso Maturidade</a></li>
                 </ul>
               </li>
+
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Teste
+                </a>
+                <ul className="dropdown-menu">
+                  <li><a className="dropdown-item" href="/test/teams">Equipes</a></li>
+                  <li><a className="dropdown-item" href="/test/ministries">Ministérios</a></li>
+                  <li><a className="dropdown-item" href="/test/schedule">Agenda</a></li>
+                </ul>
+              </li>
+
             </ul>
           </div>
 

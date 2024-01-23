@@ -23,7 +23,7 @@ export function Users() {
   return (
     <div>
       <ul className="list-group">
-        {usersData.map((user) => (
+        {usersData.map((user: User) => (
           <li key={user.id} className="list-group-item">
             {user.username} | {user.email}
           </li>
