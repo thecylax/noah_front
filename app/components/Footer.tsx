@@ -7,20 +7,11 @@ export function Footer() {
           <a className="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/igrejanoah.araucaria/" role="button">
             <i className="bi bi-facebook"></i>
           </a>
-          <a className="btn btn-outline-light btn-floating m-1" href="#!" role="button">
-            <i className="bi bi-twitter-x"></i></a>
-
-          <a className="btn btn-outline-light btn-floating m-1" href="#!" role="button">
-            <i className="bi bi-google"></i>
-          </a>
 
           <a className="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/igrejanoah.araucaria/" role="button">
             <i className="bi bi-instagram"></i>
           </a>
 
-          <a className="btn btn-outline-light btn-floating m-1" href="#!" role="button">
-            <i className="bi bi-linkedin"></i>
-          </a>
         </section>
 
         <section className="mb-4">

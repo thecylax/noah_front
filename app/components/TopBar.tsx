@@ -3,7 +3,7 @@ export function TopBar() {
     return (
       <nav className="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand" href="/">
             <img src="/images/Icone_Noah_Branco.png" alt="noah" height="56"></img>
           </a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +38,7 @@ export function TopBar() {
                 </a>
                 <ul className="dropdown-menu">
                   <li><a className="dropdown-item" href="/timetable/praise">Louvor</a></li>
+                  <li><a className="dropdown-item" href="/timetable/praise2">Louvor2</a></li>
                   <li><a className="dropdown-item" href="#">Diaconato</a></li>
                   <li><a className="dropdown-item" href="#">Kids</a></li>
                 </ul>

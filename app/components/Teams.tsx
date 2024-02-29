@@ -5,7 +5,7 @@ export function Teams() {
   const [teamsData, setTeamData] = useState([]);
   
   useEffect(() => {
-    const apiUrl = 'http://localhost:8000/teams/';
+    const apiUrl = 'http://localhost:8000/api/teams/';
 
     fetch(apiUrl)
       .then((response) => response.json())

@@ -5,7 +5,7 @@ export function Ministries() {
   const [data, setData] = useState([]);
   
   useEffect(() => {
-    const apiUrl = 'http://localhost:8000/ministries/';
+    const apiUrl = 'http://localhost:8000/api/ministries/';
 
     fetch(apiUrl)
       .then((response) => response.json())
