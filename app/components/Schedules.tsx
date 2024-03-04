@@ -1,11 +1,15 @@
 import { SetStateAction, useEffect, useState } from "react";
 import { Schedule } from "../models/Schedule";
 import { User } from "../models/User";
+import ShowPlaylistModal from "./PlaylistModal";
+import { Playlist } from "../models/Playlist";
 
 export function Schedules() {
   const [schedules, setSchedules] = useState<Schedule[]>([]);
   const [query, setQuery] = useState('');
   const [openItems, setOpenItems] = useState<number[]>([]); // Array to track open items
+  const [showModal, setShowModal] = useState(false);
+  const [parameter, setParameter] = useState<Playlist | null>(null);
 
   useEffect(() => {
     const apiUrl = 'http://localhost:8000/api/schedule/';
@@ -13,7 +17,7 @@ export function Schedules() {
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => setSchedules(data.results.map((schedule: Schedule) => {
-        return new Schedule(schedule.id, schedule.name, schedule.datetime, schedule.local, schedule.teams)
+        return new Schedule(schedule.id, schedule.name, schedule.datetime, schedule.local, schedule.teams, schedule.playlist)
       })))
   }, []);
 
@@ -46,6 +50,27 @@ export function Schedules() {
     setOpenItems([]);
   }
 
+  const openModal = async (id_playlist: number) => {
+    // Defina o parâmetro antes de abrir o modal, se necessário
+    const apiUrl = `http://localhost:8000/api/playlists/${id_playlist}`;
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => setParameter(new Playlist(data.id, data.name, data.musics))
+      )
+    console.log(parameter)
+    // setParameter();
+    setShowModal(true);
+  };
+
+  const openModal2 = (id_playlist: number) => {
+    const apiUrl = `http://localhost:8000/api/playlists/${id_playlist}`;
+    console.log(apiUrl)
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   if (schedules.length === 0) {
     return <div>Carregando...</div>;
   };
@@ -65,7 +90,6 @@ export function Schedules() {
       </div>
 
       <div className="container-fluid">
-
         <div id="accordion">
           {schedules.map(schedule => (
             <div className="card" key={schedule.id}>
@@ -79,6 +103,12 @@ export function Schedules() {
 
               <div id={`#panel-${schedule.id}`} className={`collapse${openItems.includes(schedule.id) ? ' show' : ''}`} aria-labelledby={`heading-${schedule.id}`} data-bs-parent="#accordion">
                 <div className="card-body">
+                  <div>
+                    {schedule.playlist
+                      ? <button className="btn btn-sm btn-primary" onClick={() => openModal(schedule.playlist)}>Visualizar Playlist</button>
+                      : <button className="btn btn-sm btn-primary" disabled>Visualizar Playlist</button>
+                    }
+                  </div>
                   <div className="row">
                       {filterMembers(schedule.teams[0].members).map(member => (
                         <div className="col-md" key={member.id}>
@@ -101,6 +131,8 @@ export function Schedules() {
           ))}
         </div>
       </div>
+
+      <ShowPlaylistModal showModal={showModal} closeModal={closeModal} parameter={parameter} />
     </>
   )
 }

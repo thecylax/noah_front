@@ -38,7 +38,6 @@ export function TopBar() {
                 </a>
                 <ul className="dropdown-menu">
                   <li><a className="dropdown-item" href="/timetable/praise">Louvor</a></li>
-                  <li><a className="dropdown-item" href="/timetable/praise2">Louvor2</a></li>
                   <li><a className="dropdown-item" href="#">Diaconato</a></li>
                   <li><a className="dropdown-item" href="#">Kids</a></li>
                 </ul>
