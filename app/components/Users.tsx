@@ -3,14 +3,14 @@ import { User } from "../models/User";
 
 export function Users() {
   const [usersData, setUserData] = useState([]);
-  
+
   useEffect(() => {
     const apiUrl = 'http://localhost:8000/api/users/';
 
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) =>  setUserData(data.results.map((user: User) => {
-        return new User(user.id, user.username, user.email, user.groups)
+        return new User(user.id, user.username, user.email, user.groups, user.role)
       }))) //setUserData(data.results))
       .catch((error) => console.error('Failed to fetch users:', error));
   }, []);
@@ -33,18 +33,3 @@ export function Users() {
     </div>
   )
 }
-// export async function Users({promise}: {promise: Promise<User[]>}) {
-//     const users = await promise
-
-//     return (
-//       <ul>
-//         {users.map((user) => (
-//           <li key={user.id}>{user.username} | {user.email} | {user.groups}</li>
-//       ))}
-//       </ul>
-//     )
-//   }
-
-// export async function UserForm({promise}: {promise: Promise<User>}) {
-
-// }

@@ -114,7 +114,9 @@ export function Schedules() {
                         <div className="col-md" key={member.id}>
                           <div className="card mt-2">
                             <h5 className="card-header h-100">
-                              <p><img src={`/images/${schedule.icon}`} /></p>
+                              <p>
+                                {/* <img src={`/images/${schedule.icon}`} /> */}
+                              </p>
                               {member.role}
                             </h5>
                             <div className="card-body">

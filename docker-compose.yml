@@ -3,7 +3,7 @@ version: "3.8"
 services:
   nextjs:
     build: ./
-    image: noah_front:latest
+    image: noah_ui:latest
     container_name: noah
 
   nginx:

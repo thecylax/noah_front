@@ -21,7 +21,7 @@ const ShowPlaylistModal: React.FC<MyModalProps> = ({ showModal, closeModal, para
             {parameter && (
               <ul className="list-group">
                 {parameter.musics.map(music => (
-                  <li className="list-group-item list-group-item-action d-flex">
+                  <li key={music.id} className="list-group-item list-group-item-action d-flex">
                     <div className='p-2 flex-grow-1'>{music.title}</div>
                     <a href={music.youtube_link} target='_blank' className='p-2 text-danger bi-youtube' />
                     <a href={music.spotify_link} target='_blank' className='p-2 text-success bi-spotify' />
