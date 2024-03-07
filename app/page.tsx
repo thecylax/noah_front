@@ -11,6 +11,9 @@ export default function Home() {
         </div>
         <div className="carousel-inner">
           <div className="carousel-item active">
+            <img src="/images/foto0.png" className="d-block w-100" alt="..." />
+          </div>
+          <div className="carousel-item">
             <img src="/images/foto1.png" className="d-block w-100" alt="..." />
           </div>
           <div className="carousel-item">

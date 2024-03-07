@@ -15,23 +15,6 @@ export function TopBar() {
               <li className="nav-item">
                 <a className="nav-link active" aria-current="page" href="/">Início</a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/members">Membros</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">Calendário</a>
-              </li>
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Grupos
-                </a>
-                <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/groups/praise">Louvor</a></li>
-                  <li><a className="dropdown-item" href="#">Diaconato</a></li>
-                  <li><a className="dropdown-item" href="#">Kids</a></li>
-                  <li><a className="dropdown-item" href="#">Empreendedores do Reino</a></li>
-                </ul>
-              </li>
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Escala
@@ -42,28 +25,6 @@ export function TopBar() {
                   <li><a className="dropdown-item" href="#">Kids</a></li>
                 </ul>
               </li>
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Eventos
-                </a>
-                <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/notes">Acampamento</a></li>
-                  <li><a className="dropdown-item" href="#">Curso de Batismo</a></li>
-                  <li><a className="dropdown-item" href="#">Curso Maturidade</a></li>
-                </ul>
-              </li>
-
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Teste
-                </a>
-                <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/test/teams">Equipes</a></li>
-                  <li><a className="dropdown-item" href="/test/ministries">Ministérios</a></li>
-                  <li><a className="dropdown-item" href="/test/schedule">Agenda</a></li>
-                </ul>
-              </li>
-
             </ul>
           </div>
 

@@ -12,7 +12,7 @@ export function Schedules() {
   const [parameter, setParameter] = useState<Playlist | null>(null);
 
   useEffect(() => {
-    const apiUrl = 'http://localhost:8000/api/schedule/';
+    const apiUrl = 'http://localhost/api/schedule/';
 
     fetch(apiUrl)
       .then((response) => response.json())
@@ -52,7 +52,7 @@ export function Schedules() {
 
   const openModal = async (id_playlist: number) => {
     // Defina o parâmetro antes de abrir o modal, se necessário
-    const apiUrl = `http://localhost:8000/api/playlists/${id_playlist}`;
+    const apiUrl = `http://localhost/api/playlists/${id_playlist}`;
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => setParameter(new Playlist(data.id, data.name, data.musics))
@@ -63,7 +63,7 @@ export function Schedules() {
   };
 
   const openModal2 = (id_playlist: number) => {
-    const apiUrl = `http://localhost:8000/api/playlists/${id_playlist}`;
+    const apiUrl = `http://localhost/api/playlists/${id_playlist}`;
     console.log(apiUrl)
   };
 
@@ -72,7 +72,21 @@ export function Schedules() {
   };
 
   if (schedules.length === 0) {
-    return <div>Carregando...</div>;
+    return (
+      <div className="card-body">
+
+        <h5 className="card-title placeholder-glow">
+          <span className="placeholder col-6"></span>
+        </h5>
+        <p className="card-text placeholder-glow">
+          <span className="placeholder col-7"></span>
+          <span className="placeholder col-4"></span>
+          <span className="placeholder col-4"></span>
+          <span className="placeholder col-6"></span>
+          <span className="placeholder col-8"></span>
+        </p>
+      </div>
+    )
   };
 
   return (
@@ -114,14 +128,14 @@ export function Schedules() {
                         <div className="col-md" key={member.id}>
                           <div className="card mt-2">
                             <h5 className="card-header h-100">
-                              <p>
-                                {/* <img src={`/images/${schedule.icon}`} /> */}
-                              </p>
-                              {member.role}
+                              {/* <p>
+                                <img src={`/images/${schedule.icon}`} />
+                              </p> */}
+                              <strong>{member.role}</strong>
                             </h5>
                             <div className="card-body">
-                              <h5 className="card-title">{member.username}</h5>
-                              <p className="card-text">Some extra text.</p>
+                              <h5 className="card-title"><i>{member.username}</i></h5>
+                              {/* <p className="card-text">Some extra text.</p> */}
                             </div>
                           </div>
                         </div>

@@ -2,10 +2,6 @@ body {
   background-image: linear-gradient(to right, #1B1464, #93278F);
 }
 
-.copyright {
-  background-color: rgba(0, 0, 0, 0.2);
-}
-
 .navbar {
   margin-bottom: 50px;
 }
