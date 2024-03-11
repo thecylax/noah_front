@@ -24,7 +24,7 @@ export default function Page() {
     }
 
     useEffect(() => {
-        const apiUrl = 'http://localhost/api/users/';
+        const apiUrl = `${process.env.NEXT_PUBLIC_APIURL}/users/`;
 
         fetch(apiUrl)
           .then((response) => response.json())

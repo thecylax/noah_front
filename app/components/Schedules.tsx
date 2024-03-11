@@ -12,7 +12,8 @@ export function Schedules() {
   const [parameter, setParameter] = useState<Playlist | null>(null);
 
   useEffect(() => {
-    const apiUrl = 'http://168.75.95.7/api/schedule/';
+    const apiUrl = `${process.env.NEXT_PUBLIC_APIURL}/schedule/`
+    // const apiUrl = 'http://168.75.95.7/api/schedule/';
 
     fetch(apiUrl)
       .then((response) => response.json())
@@ -52,7 +53,8 @@ export function Schedules() {
 
   const openModal = async (id_playlist: number) => {
     // Defina o parâmetro antes de abrir o modal, se necessário
-    const apiUrl = `http://168.75.95.7/api/playlists/${id_playlist}`;
+    const apiUrl = `${process.env.NEXT_PUBLIC_APIURL}/playlists/${id_playlist}`
+    // const apiUrl = `http://168.75.95.7/api/playlists/${id_playlist}`;
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => setParameter(new Playlist(data.id, data.name, data.musics))
@@ -60,11 +62,6 @@ export function Schedules() {
     console.log(parameter)
     // setParameter();
     setShowModal(true);
-  };
-
-  const openModal2 = (id_playlist: number) => {
-    const apiUrl = `http://168.75.95.7/api/playlists/${id_playlist}`;
-    console.log(apiUrl)
   };
 
   const closeModal = () => {
