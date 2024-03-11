@@ -12,7 +12,7 @@ export function Schedules() {
   const [parameter, setParameter] = useState<Playlist | null>(null);
 
   useEffect(() => {
-    const apiUrl = 'http://localhost/api/schedule/';
+    const apiUrl = 'http://168.75.95.7/api/schedule/';
 
     fetch(apiUrl)
       .then((response) => response.json())
@@ -52,7 +52,7 @@ export function Schedules() {
 
   const openModal = async (id_playlist: number) => {
     // Defina o parâmetro antes de abrir o modal, se necessário
-    const apiUrl = `http://localhost/api/playlists/${id_playlist}`;
+    const apiUrl = `http://168.75.95.7/api/playlists/${id_playlist}`;
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => setParameter(new Playlist(data.id, data.name, data.musics))
@@ -63,7 +63,7 @@ export function Schedules() {
   };
 
   const openModal2 = (id_playlist: number) => {
-    const apiUrl = `http://localhost/api/playlists/${id_playlist}`;
+    const apiUrl = `http://168.75.95.7/api/playlists/${id_playlist}`;
     console.log(apiUrl)
   };
 
