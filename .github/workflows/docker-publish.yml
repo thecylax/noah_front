@@ -79,7 +79,7 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:$(date +%Y%m%d%H%M%S)
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:$(date +%s)
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
