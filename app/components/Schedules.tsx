@@ -12,7 +12,7 @@ export function Schedules() {
   const [parameter, setParameter] = useState<Playlist | null>(null);
 
   useEffect(() => {
-    const apiUrl = 'http://localhost:8000/api/schedule/';
+    const apiUrl = 'http://168.75.95.7/api/schedule/';
 
     fetch(apiUrl)
       .then((response) => response.json())
@@ -25,15 +25,16 @@ export function Schedules() {
     const { value } = e.target;
     setQuery(value);
 
-    const firstMatchingItem = schedules.find(schedule =>
+    const matchingItems = schedules.filter(schedule =>
       schedule.teams.some(team =>
-        team.members.some(member =>
-          member.username.toLocaleLowerCase().includes(value.toLowerCase())
-        )
+          team.members.some(member =>
+              member.username.toLocaleLowerCase().includes(value.toLowerCase())
+          )
       )
     );
-    if (firstMatchingItem) {
-      setOpenItems([firstMatchingItem.id]);
+    if (matchingItems.length > 0) {
+      const matchingItemIds = matchingItems.map(item => item.id);
+      setOpenItems(matchingItemIds);
     } else {
       setOpenItems([]);
     }
@@ -52,7 +53,7 @@ export function Schedules() {
 
   const openModal = async (id_playlist: number) => {
     // Defina o parâmetro antes de abrir o modal, se necessário
-    const apiUrl = `http://localhost:8000/api/playlists/${id_playlist}`;
+    const apiUrl = 'http://168.75.95.7/api//playlists/${id_playlist}';
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => setParameter(new Playlist(data.id, data.name, data.musics))
@@ -60,11 +61,6 @@ export function Schedules() {
     console.log(parameter)
     // setParameter();
     setShowModal(true);
-  };
-
-  const openModal2 = (id_playlist: number) => {
-    const apiUrl = `http://localhost:8000/api/playlists/${id_playlist}`;
-    console.log(apiUrl)
   };
 
   const closeModal = () => {
@@ -90,19 +86,16 @@ export function Schedules() {
       </div>
 
       <div className="container-fluid">
-        <div id="accordion">
+        <div className="accordion">
           {schedules.map(schedule => (
-            <div className="card" key={schedule.id}>
-              <div className="card-header" id={`heading-${schedule.id}`}>
-                <h5 className="mb-0">
-                  <button className="btn btn-light" data-bs-toggle="collapse" data-bs-target={`#panel-${schedule.id}`} aria-expanded="true" aria-controls="collapseOne" onClick={() => setOpenItems(openItems.includes(schedule.id) ? [] : [schedule.id])}>
-                    {schedule.name} - {schedule.datetime.toLocaleDateString()}
-                  </button>
-                </h5>
+            <div className="accordion-item" key={schedule.id}>
+              <div className="accordion-header">
+                <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={`#panel-${schedule.id}`} aria-expanded="true" aria-controls={`panel-${schedule.id}`}>
+                  {schedule.name} - {schedule.datetime.toLocaleDateString()}
+                </button>
               </div>
-
-              <div id={`#panel-${schedule.id}`} className={`collapse${openItems.includes(schedule.id) ? ' show' : ''}`} aria-labelledby={`heading-${schedule.id}`} data-bs-parent="#accordion">
-                <div className="card-body">
+              <div id={`panel-${schedule.id}`} className={`accordion-collapse collapse ${openItems.includes(schedule.id) ? ' show' : ''}`} aria-labelledby={`heading-${schedule.id}`}>
+                <div className="accordion-body">
                   <div>
                     {schedule.playlist
                       ? <button className="btn btn-sm btn-primary" onClick={() => openModal(schedule.playlist)}>Visualizar Playlist</button>
@@ -110,23 +103,19 @@ export function Schedules() {
                     }
                   </div>
                   <div className="row">
-                      {filterMembers(schedule.teams[0].members).map(member => (
-                        <div className="col-md" key={member.id}>
-                          <div className="card mt-2">
-                            <h5 className="card-header h-100">
-                              <p>
-                                {/* <img src={`/images/${schedule.icon}`} /> */}
-                              </p>
-                              {member.role}
-                            </h5>
-                            <div className="card-body">
-                              <h5 className="card-title">{member.username}</h5>
-                              <p className="card-text">Some extra text.</p>
-                            </div>
+                    {filterMembers(schedule.teams[0].members).map(member => (
+                      <div className="col-md" key={member.id}>
+                        <div className="card mt-2">
+                          <h5 className="card-header h-100">
+                            {member.role}
+                          </h5>
+                          <div className="card-body">
+                            <h5 className="card-title">{member.username}</h5>
                           </div>
                         </div>
-                      ))}
-                    </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

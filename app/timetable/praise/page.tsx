@@ -3,7 +3,6 @@
 import { MyDatePicker } from "@/app/components/DatePicker"
 import { Schedules } from "@/app/components/Schedules"
 import { User } from "@/app/models/User";
-import { parse } from "path";
 import { SetStateAction, useEffect, useState } from "react";
 
 export default function Page() {
@@ -24,7 +23,7 @@ export default function Page() {
     }
 
     useEffect(() => {
-        const apiUrl = 'http://localhost:8000/api/users/';
+        const apiUrl = 'http://168.75.95.7/api/users/';
 
         fetch(apiUrl)
           .then((response) => response.json())

@@ -3,9 +3,9 @@ import { Ministry } from "../models/Ministry";
 
 export function Ministries() {
   const [data, setData] = useState([]);
-  
+
   useEffect(() => {
-    const apiUrl = 'http://localhost:8000/api/ministries/';
+    const apiUrl = `${process.env.NEXT_PUBLIC_APIURL}/ministries/`;
 
     fetch(apiUrl)
       .then((response) => response.json())

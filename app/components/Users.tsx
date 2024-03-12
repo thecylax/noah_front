@@ -5,7 +5,7 @@ export function Users() {
   const [usersData, setUserData] = useState([]);
 
   useEffect(() => {
-    const apiUrl = 'http://localhost:8000/api/users/';
+    const apiUrl = `${process.env.NEXT_PUBLIC_APIURL}/users/`;
 
     fetch(apiUrl)
       .then((response) => response.json())
