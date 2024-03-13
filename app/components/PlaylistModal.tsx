@@ -14,7 +14,14 @@ const ShowPlaylistModal: React.FC<MyModalProps> = ({ showModal, closeModal, para
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">Playlist</h5>
+            <h5 className="modal-title">
+              <div>
+                Playlist
+                {parameter &&
+                  <a href={parameter.spotify_link} target='_blank' className='p-2 text-success bi-spotify' />
+                }
+              </div>
+            </h5>
             <button type="button" className="btn btn-close" aria-label="Close" onClick={closeModal} />
           </div>
           <div className="modal-body">
@@ -24,7 +31,6 @@ const ShowPlaylistModal: React.FC<MyModalProps> = ({ showModal, closeModal, para
                   <li key={music.id} className="list-group-item list-group-item-action d-flex">
                     <div className='p-2 flex-grow-1'>{music.title}</div>
                     <a href={music.youtube_link} target='_blank' className='p-2 text-danger bi-youtube' />
-                    <a href={music.spotify_link} target='_blank' className='p-2 text-success bi-spotify' />
                     <a href={music.cifra_link} target='_blank' className='p-2 text-dark bi-music-note-list' />
                   </li>
                 ))}
