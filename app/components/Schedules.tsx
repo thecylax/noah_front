@@ -12,6 +12,7 @@ export function Schedules() {
   const [parameter, setParameter] = useState<Playlist | null>(null);
 
   useEffect(() => {
+    // const apiUrl = 'http://localhost:8000/api/schedule/';
     const apiUrl = 'http://168.75.95.7/api/schedule/';
 
     fetch(apiUrl)
@@ -53,10 +54,11 @@ export function Schedules() {
 
   const openModal = async (id_playlist: number) => {
     // Defina o parâmetro antes de abrir o modal, se necessário
+    // const apiUrl = `http://localhost:8000/api/playlists/${id_playlist}`;
     const apiUrl = `http://168.75.95.7/api/playlists/${id_playlist}`;
     fetch(apiUrl)
       .then((response) => response.json())
-      .then((data) => setParameter(new Playlist(data.id, data.name, data.musics))
+      .then((data) => setParameter(new Playlist(data.id, data.name, data.spotify_link, data.musics))
       )
     console.log(parameter)
     // setParameter();
