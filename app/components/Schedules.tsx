@@ -53,7 +53,7 @@ export function Schedules() {
 
   const openModal = async (id_playlist: number) => {
     // Defina o parâmetro antes de abrir o modal, se necessário
-    const apiUrl = 'http://168.75.95.7/api/playlists/${id_playlist}';
+    const apiUrl = `http://168.75.95.7/api/playlists/${id_playlist}`;
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => setParameter(new Playlist(data.id, data.name, data.musics))
