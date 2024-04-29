@@ -5,6 +5,8 @@ services:
     build: ./
     image: noah_ui:latest
     container_name: noah
+    environment:
+      - NODE_ENV=${NODE_ENV}
 
   nginx:
     build: ./nginx

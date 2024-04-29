@@ -2,8 +2,12 @@ body {
   background-image: linear-gradient(to right, #1B1464, #93278F);
 }
 
+.modal-content {
+  background-image: linear-gradient(to right, #1B1464, #93278F);
+}
+
 .navbar {
-  margin-bottom: 50px;
+  margin-bottom: 10px;
 }
 
 .footer {
@@ -17,4 +21,24 @@ body {
 
 .space-up {
   margin-top: 10px !important;
+}
+
+:root {
+  --bs-breadcrumb-divider: '>';
+}
+
+.breadcrumb>.breadcrumb-item+.breadcrumb-item::before {
+  color: whitesmoke;
+}
+
+/* .breadcrumb > .breadcrumb-item a {
+  --bs-text-opacity: .5;
+} */
+
+.breadcrumb>.breadcrumb-item.active {
+  --bs-text-opacity: .7;
+}
+
+.h-3 {
+  height: 3px !important;
 }
