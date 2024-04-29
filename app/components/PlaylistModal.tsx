@@ -1,10 +1,12 @@
 import React from 'react';
-import { Playlist } from '../models/Playlist';
+import { PlaylistModel } from "../types";
+
+import { Music } from "../components/Music"
 
 interface MyModalProps {
   showModal: boolean;
   closeModal: () => void;
-  parameter: Playlist | null;
+  parameter: PlaylistModel | null;
 }
 
 const ShowPlaylistModal: React.FC<MyModalProps> = ({ showModal, closeModal, parameter }) => {
@@ -13,8 +15,8 @@ const ShowPlaylistModal: React.FC<MyModalProps> = ({ showModal, closeModal, para
     <div className={modalClass} tabIndex={-1} role="dialog" style={{ display: showModal ? 'block' : 'none' }}>
       <div className="modal-dialog" role="document">
         <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title">
+          <div className="modal-header bg-dark bg-opacity-50">
+            <h5 className="modal-title text-white">
               <div>
                 Playlist
                 {parameter &&
@@ -26,18 +28,14 @@ const ShowPlaylistModal: React.FC<MyModalProps> = ({ showModal, closeModal, para
           </div>
           <div className="modal-body">
             {parameter && (
-              <ul className="list-group">
-                {parameter.musics.map(music => (
-                  <li key={music.id} className="list-group-item list-group-item-action d-flex">
-                    <div className='p-2 flex-grow-1'>{music.title}</div>
-                    <a href={music.youtube_link} target='_blank' className='p-2 text-danger bi-youtube' />
-                    <a href={music.cifra_link} target='_blank' className='p-2 text-dark bi-music-note-list' />
-                  </li>
-                ))}
-              </ul>
+            <div className="list-group">
+              {parameter.musics.map(music => (
+                <Music key={music.id} editable={false} music={music} />
+              ))}
+            </div>
             )}
           </div>
-          <div className="modal-footer">
+          <div className="modal-footer bg-dark bg-opacity-50">
             <button type="button" className="btn btn-secondary" onClick={closeModal}>
               Fechar
             </button>
