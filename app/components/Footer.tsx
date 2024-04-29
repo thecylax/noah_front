@@ -16,7 +16,7 @@ export function Footer() {
 
         <section className="mb-4">
           <p>Culto da família aos domingos às 10h e às 18h30</p>
-          <p>Rua Rio Grande do Norte, 301 - Iguaçu / Araucária</p>
+          <p>Rua Albary Pizzato Ferreira, 153 - Iguaçu / Araucária</p>
         </section>
 
         <div className="copyright text-center p-3">
