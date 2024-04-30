@@ -8,7 +8,7 @@ import { MusicModel } from "../types";
 import CreateMusicModal from "../modals/CreateMusicModal";
 
 export default function Page() {
-  const { data, error, isLoading } = useSWR<any>(`/api/musics/`, fetcher);
+  const { data, error, isLoading } = useSWR<any>(`/data/musics/`, fetcher);
   const [musicData, setMusicData] = useState<MusicModel[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [query, setQuery] = useState('');
@@ -54,7 +54,7 @@ export default function Page() {
   const addMusic = () => {
     const lastMusic = musicData[musicData.length - 1];
     const id = lastMusic ? lastMusic.id : 1;
-    fetcher(`/api/musics/${id}/`).then((m) => {
+    fetcher(`/data/musics/${id}/`).then((m) => {
       setMusicData((oldMusic) => [...oldMusic, m]);
     })
   };

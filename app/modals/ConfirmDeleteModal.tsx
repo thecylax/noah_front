@@ -10,7 +10,7 @@ const ConfirmDeleteModal = ({ showModal, closeModal, itemId }: MyModalProps) => 
   const confirm = async (e: any) => {
     e.preventDefault()
     if (itemId) {
-      const res = await fetch(`/api/musics/${itemId}`, {
+      const res = await fetch(`/data/musics/${itemId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
