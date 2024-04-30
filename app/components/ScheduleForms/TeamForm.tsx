@@ -1,6 +1,7 @@
+"use client";
+
 import { fetcher } from '@/app/helpers/fetcher';
 import { UserModel } from '@/app/types';
-import { routeModule } from 'next/dist/build/templates/app-page';
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import useSWR from 'swr';

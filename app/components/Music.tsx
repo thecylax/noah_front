@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import CreateMusicModal from "../modals/CreateMusicModal";
 import ConfirmDeleteModal from "../modals/ConfirmDeleteModal";

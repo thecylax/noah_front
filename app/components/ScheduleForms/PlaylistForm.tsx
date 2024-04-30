@@ -1,3 +1,5 @@
+"use client";
+
 import { fetcher } from '@/app/helpers/fetcher';
 import { MusicModel } from '@/app/types';
 import { useEffect, useState } from 'react';
