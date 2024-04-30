@@ -9,7 +9,7 @@ import useSWR from 'swr';
 export default function TeamF(props: any) {
   const { data, handleChange } = props;
   const [usersData, setUserData] = useState<UserModel[]>([]);
-  const { data: users, error, isLoading } = useSWR<any>(`/api/users/`, fetcher);
+  const { data: users, error, isLoading } = useSWR<any>(`/data/users/`, fetcher);
 
   useEffect(() => {
     if (users && users.result.results) {

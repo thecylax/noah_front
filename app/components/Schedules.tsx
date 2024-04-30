@@ -10,7 +10,7 @@ export function Schedules() {
   const [openItems, setOpenItems] = useState<number[]>([]); // Array to track open items
   const [showModal, setShowModal] = useState(false);
   const [parameter, setParameter] = useState<PlaylistModel | null>(null);
-  const { data: schedules, error, isLoading } = useSWR<any>(`/api/schedule/`, fetcher);
+  const { data: schedules, error, isLoading } = useSWR<any>(`/data/schedule/`, fetcher);
 
   useEffect(() => {
     if (schedules && schedules.result.results) {
@@ -50,7 +50,7 @@ export function Schedules() {
   }
 
   const openModal = async (id_playlist: number) => {
-    const apiUrl = `/api/playlist/${id_playlist}`;
+    const apiUrl = `/data/playlist/${id_playlist}`;
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => setParameter(data))

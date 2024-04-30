@@ -180,7 +180,7 @@ const MainForm: React.FC<MainFormProps> = ({ closeModal }) => {
     if (data.playlist_musics.length != 0 && data.schedule_name) {
       const formData = formatPlaylist();
       try {
-        const res = await fetch('/api/playlist/', {
+        const res = await fetch('/data/playlist/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -196,7 +196,7 @@ const MainForm: React.FC<MainFormProps> = ({ closeModal }) => {
     if (data.team_members_ministro.value != 0 && data.schedule_name) {
       const formData = formatTeam();
       try {
-        const res = await fetch('/api/teams/', {
+        const res = await fetch('/data/teams/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -212,7 +212,7 @@ const MainForm: React.FC<MainFormProps> = ({ closeModal }) => {
     if (data.schedule_name) {
       const formData = formatSchedule(teamId, playlistId);
       try {
-        const res = await fetch('/api/schedule/', {
+        const res = await fetch('/data/schedule/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

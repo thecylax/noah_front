@@ -18,7 +18,7 @@ const CreateMusicModal = ({ showModal, closeModal, musicId }: MyModalProps) => {
   const [singer, setSinger] = useState<string>('');
   const [ytLink, setYTLink] = useState<string>('');
   const [ccLink, setCCLink] = useState<string>('');
-  const { data, error, isLoading } = useSWR<any>(musicId ? `/api/musics/${musicId}/` : null, fetcher);
+  const { data, error, isLoading } = useSWR<any>(musicId ? `/data/musics/${musicId}/` : null, fetcher);
 
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const CreateMusicModal = ({ showModal, closeModal, musicId }: MyModalProps) => {
       }
       let res = null;
       if (musicId) {
-        res = await fetch(`/api/musics/${musicId}`, {
+        res = await fetch(`/data/musics/${musicId}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
@@ -62,7 +62,7 @@ const CreateMusicModal = ({ showModal, closeModal, musicId }: MyModalProps) => {
           body: JSON.stringify(formData)
         });
       } else {
-        res = await fetch('/api/musics/', {
+        res = await fetch('/data/musics/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

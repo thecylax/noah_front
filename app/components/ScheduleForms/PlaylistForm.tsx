@@ -10,7 +10,7 @@ export default function PlaylistF(props: any) {
   const { data, handleChange } = props;
   const [selectedOption, setSelectedOption] = useState<any[] | null>([]);
   const [musicsData, setMusicsData] = useState<MusicModel[]>([]);
-  const { data: musics, error, isLoading } = useSWR<any>(`/api/musics/`, fetcher);
+  const { data: musics, error, isLoading } = useSWR<any>(`/data/musics/`, fetcher);
 
   useEffect(() => {
     if (musics && musics.result.results) {
