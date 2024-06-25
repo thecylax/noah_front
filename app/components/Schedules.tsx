@@ -113,11 +113,21 @@ export function Schedules() {
             </div>
             <div id={`panel-${schedule.id}`} className={`accordion-collapse collapse ${openItems.includes(schedule.id) ? ' show' : ''}`} aria-labelledby={`heading-${schedule.id}`}>
               <div className="accordion-body">
-                <div>
+                <div className="d-flex w-100 justify-content-between">
                   {schedule.playlist
                     ? <button className="btn btn-sm btn-primary" onClick={() => openModal(schedule.playlist)}>Visualizar Playlist</button>
                     : <button className="btn btn-sm btn-primary" disabled>Visualizar Playlist</button>
                   }
+                  <div className="btn-group">
+                    <button className="btn btn-outline-secondary btn-sm dropdown-toggle text-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i className="bi-pencil"></i>
+                    </button>
+                    <ul className="dropdown-menu">
+                      <li><a className="dropdown-item" href={`/data/schedule/${schedule.id}`}>Editar Escala</a></li>
+                      <li><a className="dropdown-item" href={`/data/playlist/${schedule.playlist}`}>Editar Playlist</a></li>
+                      <li><a className="dropdown-item" href={`/data/playlist/${schedule.teams[0].id}`}>Editar Equipe</a></li>
+                    </ul>
+                  </div>
                 </div>
                 <div className="row">
                   {filterMembers(schedule.teams[0].members).map(member => (

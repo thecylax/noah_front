@@ -3,16 +3,23 @@
 import { useState } from "react";
 import { Schedules } from "@/app/components/Schedules"
 import CreateScheduleModal from "@/app/modals/CreateScheduleModal";
+import CreateScheduleModalSimplified from "@/app/modals/CreateScheduleModalSimplified";
 
 export default function Page() {
   const [showModal, setShowModal] = useState(false);
+  const [showModal2, setShowModal2] = useState(false);
 
   const openModal = async () => {
     setShowModal(true);
   };
 
+  const openModal1 = async () => {
+    setShowModal2(true);
+  };
+
   const closeModal = () => {
     setShowModal(false);
+    setShowModal2(false);
   };
 
   return (
@@ -26,10 +33,12 @@ export default function Page() {
       </nav>
       <div className="d-flex w-100 justify-content-between">
         <span></span>
+        <button type="button" className="btn btn-primary mb-2" onClick={openModal1}>Simplificado</button>
         <button type="button" className="btn btn-primary mb-2" onClick={openModal}>Adicionar</button>
       </div>
 
       <CreateScheduleModal showModal={showModal} closeModal={closeModal} />
+      <CreateScheduleModalSimplified showModal={showModal2} closeModal={closeModal} />
       <Schedules />
     </>
   )
