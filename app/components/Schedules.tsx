@@ -1,14 +1,17 @@
 import { SetStateAction, useEffect, useState } from "react";
 import ShowPlaylistModal from "./PlaylistModal";
+
 import useSWR from 'swr';
 import { fetcher } from "../helpers/fetcher";
 import { PlaylistModel, ScheduleModel, UserModel } from "../types";
+import { PlaylistModal } from "../modals/PlaylistModal";
 
 export function Schedules() {
   const [schedulesData, setSchedulesData] = useState<ScheduleModel[]>([]);
   const [query, setQuery] = useState('');
   const [openItems, setOpenItems] = useState<number[]>([]); // Array to track open items
   const [showModal, setShowModal] = useState(false);
+  const [showModalEdit, setShowModalEdit] = useState(false);
   const [parameter, setParameter] = useState<PlaylistModel | null>(null);
   const { data: schedules, error, isLoading } = useSWR<any>(`/data/schedule/`, fetcher);
 
@@ -59,6 +62,15 @@ export function Schedules() {
 
   const closeModal = () => {
     setShowModal(false);
+    setShowModalEdit(false);
+  };
+
+  const openPlaylistModal = async (id_playlist: number) => {
+    const apiUrl = `/data/playlist/${id_playlist}`;
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => setParameter(data))
+    setShowModalEdit(true);
   };
 
   if (error) return (
@@ -124,7 +136,8 @@ export function Schedules() {
                     </button>
                     <ul className="dropdown-menu">
                       <li><a className="dropdown-item" href={`/data/schedule/${schedule.id}`}>Editar Escala</a></li>
-                      <li><a className="dropdown-item" href={`/data/playlist/${schedule.playlist}`}>Editar Playlist</a></li>
+                      {/* <li><a className="dropdown-item" href={`/data/playlist/${schedule.playlist}`}>Editar Playlist</a></li> */}
+                      <li><button className="dropdown-item" onClick={() => openPlaylistModal(schedule.playlist)}>Editar Playlist</button></li>
                       <li><a className="dropdown-item" href={`/data/playlist/${schedule.teams[0].id}`}>Editar Equipe</a></li>
                     </ul>
                   </div>
@@ -150,6 +163,7 @@ export function Schedules() {
       </div>
 
       <ShowPlaylistModal showModal={showModal} closeModal={closeModal} parameter={parameter} />
+      <PlaylistModal showModal={showModalEdit} closeModal={closeModal} editable={true} parameter={parameter} />
     </>
   )
 }
