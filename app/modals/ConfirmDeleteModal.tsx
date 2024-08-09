@@ -26,16 +26,18 @@ const ConfirmDeleteModal = ({ showModal, closeModal, itemId }: MyModalProps) => 
     <div className={modalClass} tabIndex={-1} role="dialog" style={{ display: showModal ? 'block' : 'none' }}>
       <div className="modal-dialog" role="document">
         <div className="modal-content">
-          <div className="modal-header">
-              <h5 className="modal-title">Remoção</h5>
+          <div className="modal-header bg-dark bg-opacity-50">
+              <h5 className="modal-title text-light">Remoção</h5>
             <button type="button" className="btn btn-close" aria-label="Close" onClick={closeModal} />
           </div>
 
-          <div className="modal-body">
-            Tem certeza que deseja apagar este item?
+          <div className="modal-body text-light">
+            <strong>
+              Tem certeza que deseja apagar este item?
+            </strong>
           </div>
 
-          <div className="modal-footer">
+          <div className="modal-footer bg-dark bg-opacity-50">
             <button type="button" className="btn btn-secondary" onClick={closeModal}>
               Cancelar
             </button>
