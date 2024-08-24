@@ -11,7 +11,10 @@ export function Schedules() {
   const [query, setQuery] = useState('');
   const [openItems, setOpenItems] = useState<number[]>([]); // Array to track open items
   const [showModal, setShowModal] = useState(false);
-  const [showModalEdit, setShowModalEdit] = useState(false);
+  const [showModalEdit, setShowModalEdit] = useState({
+    show: false,
+    hasData: false,
+  });
   const [parameter, setParameter] = useState<PlaylistModel | null>(null);
   const { data: schedules, error, isLoading } = useSWR<any>(`/data/schedule/`, fetcher);
 
@@ -62,15 +65,20 @@ export function Schedules() {
 
   const closeModal = () => {
     setShowModal(false);
-    setShowModalEdit(false);
+    setShowModalEdit(({show: false, hasData:false}));
   };
 
   const openPlaylistModal = async (id_playlist: number) => {
-    const apiUrl = `/data/playlist/${id_playlist}`;
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => setParameter(data))
-    setShowModalEdit(true);
+    if (id_playlist != null) {
+      const apiUrl = `/data/playlist/${id_playlist}`;
+      fetch(apiUrl)
+        .then((response) => response.json())
+        .then((data) => setParameter(data))
+    } else {
+      const foo = 'vazio!';
+      console.log(foo);
+    }
+    setShowModalEdit(({show: true, hasData: foo}));
   };
 
   if (error) return (

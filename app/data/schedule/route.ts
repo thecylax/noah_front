@@ -4,11 +4,12 @@ import { apiUrl } from 'config';
 const baseUrl = `${apiUrl}/schedule/`;
 
 export async function GET() {
-    const res = await fetch(`${baseUrl}?limit=10`, {
+    const res = await fetch(`${baseUrl}?limit=1000`, {
         headers: {
             'Content-Type': 'application/json',
         },
     })
+    console.log(">>> " + baseUrl)
     const result = await res.json()
     return NextResponse.json({ result })
 }
