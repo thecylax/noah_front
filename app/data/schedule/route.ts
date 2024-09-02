@@ -4,7 +4,7 @@ import { apiUrl } from 'config';
 const baseUrl = `${apiUrl}/schedule/`;
 
 export async function GET() {
-    const res = await fetch(`${baseUrl}?limit=1000`, {
+    const res = await fetch(`${baseUrl}?limit=15`, {
         headers: {
             'Content-Type': 'application/json',
         },
