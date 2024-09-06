@@ -9,7 +9,6 @@ export async function GET() {
             'Content-Type': 'application/json',
         },
     })
-    console.log(">>> " + baseUrl)
     const result = await res.json()
     return NextResponse.json({ result })
 }
@@ -23,7 +22,6 @@ export async function POST(request: NextRequest) {
         },
         body: JSON.stringify(body),
     });
-    console.log(res)
     const data = await res.json();
     return NextResponse.json(data)
 }
