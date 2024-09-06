@@ -15,16 +15,26 @@ export async function GET(request: NextRequest, { params }: { params: { id: numb
 }
 
 export async function PUT(request: NextRequest, { params }: { params: { id: number } }) {
-    const body = await request.json()
-    const res = await fetch(`${baseUrl}/${params.id}/`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-    })
-    const data = await res.json();
-    return NextResponse.json(data)
+    try {
+        const body = await request.json()
+        const res = await fetch(`${baseUrl}/${params.id}/`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body),
+        })
+        if (!res.ok) {
+            // Handle non-2xx responses
+            const errorData = await res.json();
+            return NextResponse.json(errorData, {status: res.status});
+        }
+        const data = await res.json();
+        return NextResponse.json(data)
+    } catch {
+        // Handle error, such as network issues or JSON parsing errors
+        return NextResponse.error();
+    }
 }
 
 export async function DELETE(request: NextRequest, { params }: { params: { id: number } }) {

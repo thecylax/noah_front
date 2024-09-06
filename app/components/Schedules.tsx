@@ -11,12 +11,11 @@ export function Schedules() {
   const [query, setQuery] = useState('');
   const [openItems, setOpenItems] = useState<number[]>([]); // Array to track open items
   const [showModal, setShowModal] = useState(false);
-  const [showModalEdit, setShowModalEdit] = useState({
-    show: false,
-    hasData: false,
-  });
+  const [showModalEdit, setShowModalEdit] = useState(false);
   const [parameter, setParameter] = useState<PlaylistModel | null>(null);
+  const [schedule, setSchedule] = useState<ScheduleModel>();
   const { data: schedules, error, isLoading } = useSWR<any>(`/data/schedule/`, fetcher);
+  const [errorToast, setErrorToast] = useState(false);
 
   useEffect(() => {
     if (schedules && schedules.result.results) {
@@ -65,20 +64,28 @@ export function Schedules() {
 
   const closeModal = () => {
     setShowModal(false);
-    setShowModalEdit(({show: false, hasData:false}));
+    setShowModalEdit(false);
   };
 
-  const openPlaylistModal = async (id_playlist: number) => {
-    if (id_playlist != null) {
-      const apiUrl = `/data/playlist/${id_playlist}`;
+  const openPlaylistModal = async (schedule: ScheduleModel) => {
+    if (schedule.playlist != null) {
+      const apiUrl = `/data/playlist/${schedule.playlist}`;
       fetch(apiUrl)
         .then((response) => response.json())
         .then((data) => setParameter(data))
-    } else {
-      const foo = 'vazio!';
-      console.log(foo);
     }
-    setShowModalEdit(({show: true, hasData: foo}));
+    else {
+      setParameter((prev) => ({
+        ...prev,
+        id: 0,
+        name: schedule.name,
+        spotify_link: "",
+        musics: [],
+        schedule: schedule
+      }));
+    }
+    setSchedule(schedule);
+    setShowModalEdit(true);
   };
 
   if (error) return (
@@ -143,10 +150,9 @@ export function Schedules() {
                       <i className="bi-pencil"></i>
                     </button>
                     <ul className="dropdown-menu">
-                      <li><a className="dropdown-item" href={`/data/schedule/${schedule.id}`}>Editar Escala</a></li>
-                      {/* <li><a className="dropdown-item" href={`/data/playlist/${schedule.playlist}`}>Editar Playlist</a></li> */}
-                      <li><button className="dropdown-item" onClick={() => openPlaylistModal(schedule.playlist)}>Editar Playlist</button></li>
-                      <li><a className="dropdown-item" href={`/data/playlist/${schedule.teams[0].id}`}>Editar Equipe</a></li>
+                      <li><button className="dropdown-item" onClick={() => openPlaylistModal(schedule)}>Editar Escala</button></li>
+                      <li><button className="dropdown-item" onClick={() => openPlaylistModal(schedule)}>Editar Playlist</button></li>
+                      {/* <li><a className="dropdown-item" href={`/data/playlist/${schedule.teams[0].id}`}>Editar Equipe</a></li> */}
                     </ul>
                   </div>
                 </div>
@@ -171,7 +177,7 @@ export function Schedules() {
       </div>
 
       <ShowPlaylistModal showModal={showModal} closeModal={closeModal} parameter={parameter} />
-      <PlaylistModal showModal={showModalEdit} closeModal={closeModal} editable={true} parameter={parameter} />
+      <PlaylistModal showModal={showModalEdit} closeModal={closeModal} editable={true} playlist={parameter} schedule={schedule} />
     </>
   )
 }

@@ -1,23 +1,28 @@
 import Select from 'react-select';
-import { MusicModel, PlaylistModel } from "../types";
+import { MusicModel, PlaylistModel, ScheduleModel } from "../types";
 
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { fetcher } from '../helpers/fetcher';
+import { validateUrl } from '../helpers/utils';
 
 interface MyModalProps {
   showModal: boolean;
   closeModal: () => void;
   editable: boolean;
-  parameter: PlaylistModel | null;
+  playlist: PlaylistModel | null;
+  schedule: ScheduleModel | undefined;
 }
 
-export function PlaylistModal({ showModal, closeModal, editable, parameter }: MyModalProps) {
+export function PlaylistModal({ showModal, closeModal, editable, playlist, schedule }: MyModalProps) {
+  const [isUrlValid, setIsUrlValid] = useState(false);
+  const [isMusicsValid, setIsMusicsValid] = useState(false);
+  const [urlError, setUrlError] = useState<string | null>(null);
+  const [scheduleName, setScheduleName] = useState<string>(playlist?.name || '');
   const [musicsData, setMusicsData] = useState<MusicModel[]>([]);
-  const [spotifyLink, setSpotifyLink] = useState<string>(parameter?.spotify_link || '');
-  const [hasPlaylist, setHasPlaylist] = useState<boolean>(false);
+  const [spotifyLink, setSpotifyLink] = useState<string | null>(playlist?.spotify_link || null);
   const [selectedMusics, setSelectedMusics] = useState(() => {
-    return parameter?.musics?.map((music: MusicModel) => ({
+    return playlist?.musics?.map((music: MusicModel) => ({
       label: music.title,
       value: music.id
     })) || []
@@ -32,17 +37,39 @@ export function PlaylistModal({ showModal, closeModal, editable, parameter }: My
   }, [musics, isLoading]);
 
   useEffect(() => {
-    if (parameter?.musics) {
-      setSelectedMusics(parameter.musics.map((music: MusicModel) => ({
+    if (playlist?.musics) {
+      setSelectedMusics(playlist.musics.map((music: MusicModel) => ({
         label: music.title,
         value: music.id
       })));
     } else {
       setSelectedMusics([]);
     }
-    setSpotifyLink(parameter?.spotify_link || '')
+    setScheduleName(playlist?.name || '');
+    setSpotifyLink(playlist?.spotify_link || null);
+  }, [playlist]);
 
-  }, [parameter]);
+  useEffect(() => {
+    if (spotifyLink) {
+      const isUrlValid = validateUrl(spotifyLink);
+      if (!isUrlValid) {
+        setUrlError('Link inválido!');
+        setIsUrlValid(false);
+      } else {
+        setUrlError(null);
+        setIsUrlValid(true);
+      }
+    } else {
+      setIsUrlValid(false);
+    }
+  }, [spotifyLink]);
+
+  useEffect(() => {
+    if (selectedMusics.length > 0)
+      setIsMusicsValid(true);
+    else
+      setIsMusicsValid(false);
+  }, [selectedMusics])
 
   const musicObjects = musicsData.map((music: MusicModel) => ({
     label: music.title,
@@ -53,17 +80,34 @@ export function PlaylistModal({ showModal, closeModal, editable, parameter }: My
     setSelectedMusics(selectedOptions || [])
   }
 
+  const handleUrlChange = (e: any) => {
+    setSpotifyLink(e.target.value);
+    setIsUrlValid(false);
+  };
   const closeModalX = () => {
     setSelectedMusics([]);
-    setSpotifyLink('');
-    console.log(hasPlaylist);
+    setSpotifyLink(null);
+    setScheduleName('');
     closeModal();
   };
 
   const formatPlaylist = () => {
     const payload = {
-      "spotify_link": spotifyLink,
+      "spotify_link": spotifyLink ? spotifyLink : null,
       "musics": selectedMusics?.map(m => m.value),
+      "name": scheduleName
+    }
+
+    return payload;
+  };
+
+  const formatSchedule = (playlistId: number) => {
+    const payload = {
+      "name": schedule?.name,
+      "datetime": schedule?.datetime,
+      "teams": schedule?.teams.map(member => member.id),
+      "local": schedule?.local,
+      "playlist": playlistId || null
     }
 
     return payload;
@@ -71,37 +115,65 @@ export function PlaylistModal({ showModal, closeModal, editable, parameter }: My
 
   const savePlaylist = async (e: any) => {
     e.preventDefault()
-    console.log(selectedMusics);
-    console.log(spotifyLink);
-    setHasPlaylist(false);
-    if (selectedMusics.length != 0 || spotifyLink)
-      setHasPlaylist(true);
 
-    if (selectedMusics.length != 0) {
+    if (selectedMusics.length != 0 || spotifyLink) {
       const formData = formatPlaylist();
-      console.log(formData);
-      // Mas preciso identificar se já existe a playlist
+
       // salvar a playlist primeiro, e entao com o id retornado
-      // salvar o schedule
+      // atualizar o schedule
+      let method = 'PUT';
+      let url = `/data/playlist/${playlist?.id}`;
+      let playlistId = 0;
+      if (!playlist?.id) {
+        method = 'POST';
+        url = '/data/playlist/'
+      }
 
-      // try {
-      //   const res = await fetch('/data/playlist/', {
-      //     method: 'POST',
-      //     headers: {
-      //       'Content-Type': 'application/json'
-      //     },
-      //     body: JSON.stringify(formData)
-      //   });
-      //   const playlistData = await res.json();
-      //   playlistId = playlistData.id;
-      // } catch (error) {
-      //     console.error('Ocorreu um erro:', error);
-      // };
+      try {
+        const res = await fetch(url, {
+          method: method,
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+        if (!res.ok) {
+          console.log('Erro ao buscar playlists');
+          console.log(await res.text());
+        } else {
+          const playlistData = await res.json();
+          playlistId = playlistData.id;
+        }
+      } catch (error) {
+        console.error('Ocorreu um erro:', error);
+      };
 
+      // Atualiza schedule se a playlist foi criada!
+      if (playlistId) {
+        const formData = formatSchedule(playlistId);
+        try {
+          const res = await fetch(`/data/schedule/${schedule?.id}/`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+          });
+          if (!res.ok) {
+            console.log('Erro ao salvar schedule');
+            console.log(await res.text());
+          } else {
+            const scheduleData = await res.json();
+          }
+        } catch (error) {
+          console.error('Ocorreu um erro:', error);
+        }
+      }
+      closeModalX();
     }
   }
 
-  const isButtonDisabled = spotifyLink.trim() === '' && selectedMusics.length === 0;
+  const isButtonDisabled = !isUrlValid || !isMusicsValid;
 
   return (
     <div className={modalClass} tabIndex={-1} role="dialog" style={{ display: showModal ? 'block' : 'none' }}>
@@ -119,7 +191,17 @@ export function PlaylistModal({ showModal, closeModal, editable, parameter }: My
             <div className="list-group">
               <div className="input-group mb-3">
                 <span className="input-group-text bi-spotify text-success" id="addon-wrapping"></span>
-                <input type="text" className="form-control" placeholder="Link playlist Spotify" aria-label="Nome" aria-describedby="addon-wrapping" value={spotifyLink} onChange={(e: any) => setSpotifyLink(e.target.value)} />
+                <input
+                  type="url"
+                  className={`form-control ${urlError ? 'is-invalid' : isUrlValid ? 'is-valid' : ''}`}
+                  placeholder="Link playlist Spotify"
+                  aria-label="Nome"
+                  aria-describedby="addon-wrapping"
+                  value={spotifyLink || ''}
+                  onChange={handleUrlChange}
+                  required
+                />
+                {urlError && <div className="invalid-feedback">{urlError}</div>}
               </div>
 
               <Select
@@ -132,9 +214,11 @@ export function PlaylistModal({ showModal, closeModal, editable, parameter }: My
                 placeholder="Selecione uma ou mais músicas."
                 value={selectedMusics}
                 onChange={handleChange}
+                required
               />
             </div>
           </div>
+
           <div className="modal-footer bg-dark bg-opacity-50">
             <button type="button" className="btn btn-secondary" onClick={closeModalX}>Fechar</button>
             <button type="button" className="btn btn-primary" disabled={isButtonDisabled} onClick={savePlaylist}>Salvar</button>
