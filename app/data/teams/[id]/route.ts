@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { apiUrl } from 'config';
 
-const baseUrl = `${apiUrl}/playlists`;
+const baseUrl = `${apiUrl}/teams`;
 
 export async function GET(request: NextRequest, { params }: { params: { id: number } }) {
     const res = await fetch(`${baseUrl}/${params.id}/`, {
@@ -23,11 +23,6 @@ export async function PUT(request: NextRequest, { params }: { params: { id: numb
         },
         body: JSON.stringify(body),
     })
-    if (!res.ok) {
-        // Handle non-2xx responses
-        const errorData = await res.json();
-        return NextResponse.json(errorData, {status: res.status});
-    }
     const data = await res.json();
     return NextResponse.json(data)
 }
