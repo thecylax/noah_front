@@ -22,7 +22,7 @@ export function TopBar() {
               </a>
               <ul className="dropdown-menu">
                 <li className="nav-item">
-                  <a className="nav-link" href="/teams">Equipes</a>
+                  {/* <a className="nav-link" href="/teams">Equipes</a> */}
                   <a className="nav-link" href="/musics">Músicas</a>
                   <a className="nav-link" href="/timetable/praise">Escala</a>
                 </li>
