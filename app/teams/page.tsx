@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { useEffect, useState } from "react";
 import { fetcher } from "../helpers/fetcher";
 import { Team } from "../components/Team";
-import CreateTeamModal from "../modals/CreateTeamModal";
+// import CreateTeamModal from "../modals/CreateTeamModal";
 import { TeamModel } from "../types";
 
 export default function Page() {
@@ -131,7 +131,7 @@ export default function Page() {
         ))}
       </div>
 
-      <CreateTeamModal showModal={showModal} closeModal={closeModal} teamId={0} />
+      {/* <CreateTeamModal showModal={showModal} closeModal={closeModal} teamId={0} /> */}
     </>
   )
 }

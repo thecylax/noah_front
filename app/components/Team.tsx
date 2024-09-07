@@ -4,7 +4,7 @@ import { useState } from "react";
 import CreateMusicModal from "../modals/CreateMusicModal";
 import ConfirmDeleteModal from "../modals/ConfirmDeleteModal";
 import { TeamModel } from "../types";
-import CreateTeamModal from "../modals/CreateTeamModal";
+// import CreateTeamModal from "../modals/CreateTeamModal";
 
 export function Team({ editable, team }: { editable: boolean, team: TeamModel }) {
   const [showModal, setShowModal] = useState(false);
@@ -50,7 +50,7 @@ export function Team({ editable, team }: { editable: boolean, team: TeamModel })
           <a href="#" target='_blank' className='p-2 text-danger bi-youtube' />
           <a href="#" target='_blank' className='p-2 text-dark bi-music-note-list' />
         </small> */}
-        <CreateTeamModal showModal={showModal} closeModal={closeModal} teamId={selected} />
+        {/* <CreateTeamModal showModal={showModal} closeModal={closeModal} teamId={selected} /> */}
         <ConfirmDeleteModal showModal={showConfirmModal} closeModal={closeModal} itemId={selected} />
       </div>
     </>
