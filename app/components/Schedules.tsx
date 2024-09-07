@@ -1,16 +1,21 @@
 import { SetStateAction, useEffect, useState } from "react";
 import ShowPlaylistModal from "./PlaylistModal";
+
 import useSWR from 'swr';
 import { fetcher } from "../helpers/fetcher";
 import { PlaylistModel, ScheduleModel, UserModel } from "../types";
+import { PlaylistModal } from "../modals/PlaylistModal";
 
 export function Schedules() {
   const [schedulesData, setSchedulesData] = useState<ScheduleModel[]>([]);
   const [query, setQuery] = useState('');
   const [openItems, setOpenItems] = useState<number[]>([]); // Array to track open items
   const [showModal, setShowModal] = useState(false);
+  const [showModalEdit, setShowModalEdit] = useState(false);
   const [parameter, setParameter] = useState<PlaylistModel | null>(null);
+  const [schedule, setSchedule] = useState<ScheduleModel>();
   const { data: schedules, error, isLoading } = useSWR<any>(`/data/schedule/`, fetcher);
+  const [errorToast, setErrorToast] = useState(false);
 
   useEffect(() => {
     if (schedules && schedules.result.results) {
@@ -59,6 +64,28 @@ export function Schedules() {
 
   const closeModal = () => {
     setShowModal(false);
+    setShowModalEdit(false);
+  };
+
+  const openPlaylistModal = async (schedule: ScheduleModel) => {
+    if (schedule.playlist != null) {
+      const apiUrl = `/data/playlist/${schedule.playlist}`;
+      fetch(apiUrl)
+        .then((response) => response.json())
+        .then((data) => setParameter(data))
+    }
+    else {
+      setParameter((prev) => ({
+        ...prev,
+        id: 0,
+        name: schedule.name,
+        spotify_link: "",
+        musics: [],
+        schedule: schedule
+      }));
+    }
+    setSchedule(schedule);
+    setShowModalEdit(true);
   };
 
   if (error) return (
@@ -113,11 +140,21 @@ export function Schedules() {
             </div>
             <div id={`panel-${schedule.id}`} className={`accordion-collapse collapse ${openItems.includes(schedule.id) ? ' show' : ''}`} aria-labelledby={`heading-${schedule.id}`}>
               <div className="accordion-body">
-                <div>
+                <div className="d-flex w-100 justify-content-between">
                   {schedule.playlist
                     ? <button className="btn btn-sm btn-primary" onClick={() => openModal(schedule.playlist)}>Visualizar Playlist</button>
                     : <button className="btn btn-sm btn-primary" disabled>Visualizar Playlist</button>
                   }
+                  <div className="btn-group">
+                    <button className="btn btn-outline-secondary btn-sm dropdown-toggle text-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i className="bi-pencil"></i>
+                    </button>
+                    <ul className="dropdown-menu">
+                      <li><button className="dropdown-item" onClick={() => openPlaylistModal(schedule)}>Editar Escala</button></li>
+                      <li><button className="dropdown-item" onClick={() => openPlaylistModal(schedule)}>Editar Playlist</button></li>
+                      {/* <li><a className="dropdown-item" href={`/data/playlist/${schedule.teams[0].id}`}>Editar Equipe</a></li> */}
+                    </ul>
+                  </div>
                 </div>
                 <div className="row">
                   {filterMembers(schedule.teams[0].members).map(member => (
@@ -140,6 +177,7 @@ export function Schedules() {
       </div>
 
       <ShowPlaylistModal showModal={showModal} closeModal={closeModal} parameter={parameter} />
+      <PlaylistModal showModal={showModalEdit} closeModal={closeModal} editable={true} playlist={parameter} schedule={schedule} />
     </>
   )
 }

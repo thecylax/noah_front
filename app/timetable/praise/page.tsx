@@ -3,9 +3,11 @@
 import { useState } from "react";
 import { Schedules } from "@/app/components/Schedules"
 import CreateScheduleModal from "@/app/modals/CreateScheduleModal";
+import CreateScheduleModalSimplified from "@/app/modals/CreateScheduleModalSimplified";
 
 export default function Page() {
   const [showModal, setShowModal] = useState(false);
+  const [showModal2, setShowModal2] = useState(false);
 
   const openModal = async () => {
     setShowModal(true);
@@ -13,6 +15,7 @@ export default function Page() {
 
   const closeModal = () => {
     setShowModal(false);
+    setShowModal2(false);
   };
 
   return (
@@ -30,6 +33,7 @@ export default function Page() {
       </div>
 
       <CreateScheduleModal showModal={showModal} closeModal={closeModal} />
+      <CreateScheduleModalSimplified showModal={showModal2} closeModal={closeModal} />
       <Schedules />
     </>
   )
