@@ -11,6 +11,7 @@ export default function Page() {
 
   const openModal = async () => {
     setShowModal(true);
+    // setShowModal2(true);  // FUTURO!
   };
 
   const closeModal = () => {
