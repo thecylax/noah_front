@@ -1,10 +1,11 @@
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ShowPlaylistModal from "./PlaylistModal";
 
 import useSWR from 'swr';
 import { fetcher } from "../helpers/fetcher";
 import { PlaylistModel, ScheduleModel, UserModel } from "../types";
 import { PlaylistModal } from "../modals/PlaylistModal";
+import { ScheduleModal } from "../modals/EditScheduleModal";
 
 export function Schedules() {
   const [schedulesData, setSchedulesData] = useState<ScheduleModel[]>([]);
@@ -12,8 +13,18 @@ export function Schedules() {
   const [openItems, setOpenItems] = useState<number[]>([]); // Array to track open items
   const [showModal, setShowModal] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
+  const [showScheduleModalEdit, setShowScheduleModalEdit] = useState(false);
   const [parameter, setParameter] = useState<PlaylistModel | null>(null);
-  const [schedule, setSchedule] = useState<ScheduleModel>();
+  const [schedule, setSchedule] = useState<ScheduleModel>(
+    {
+      id: 0,
+      name: '',
+      datetime: new Date().toLocaleDateString(),
+      local: '',
+      teams: [],
+      playlist: 0
+    }
+  );
   const { data: schedules, error, isLoading } = useSWR<any>(`/data/schedule/`, fetcher);
   const [errorToast, setErrorToast] = useState(false);
 
@@ -65,6 +76,7 @@ export function Schedules() {
   const closeModal = () => {
     setShowModal(false);
     setShowModalEdit(false);
+    setShowScheduleModalEdit(false);
   };
 
   const openPlaylistModal = async (schedule: ScheduleModel) => {
@@ -86,6 +98,11 @@ export function Schedules() {
     }
     setSchedule(schedule);
     setShowModalEdit(true);
+  };
+
+  const openScheduleModal = async (schedule1: ScheduleModel) => {
+    setSchedule(schedule1);
+    setShowScheduleModalEdit(true);
   };
 
   if (error) return (
@@ -150,9 +167,9 @@ export function Schedules() {
                       <i className="bi-pencil"></i>
                     </button>
                     <ul className="dropdown-menu">
-                      <li><button className="dropdown-item" onClick={() => openPlaylistModal(schedule)}>Editar Escala</button></li>
-                      <li><button className="dropdown-item" onClick={() => openPlaylistModal(schedule)}>Editar Playlist</button></li>
-                      {/* <li><a className="dropdown-item" href={`/data/playlist/${schedule.teams[0].id}`}>Editar Equipe</a></li> */}
+                      <li><button className="dropdown-item" onClick={() => openScheduleModal(schedule)}>Alterar Escala</button></li>
+                      <li><button className="dropdown-item" onClick={() => openPlaylistModal(schedule)}>Alterar Playlist</button></li>
+                      {/* <li><a className="dropdown-item" href={`/data/playlist/${schedule.teams[0].id}`}>Alterar Equipe</a></li> */}
                     </ul>
                   </div>
                 </div>
@@ -178,6 +195,7 @@ export function Schedules() {
 
       <ShowPlaylistModal showModal={showModal} closeModal={closeModal} parameter={parameter} />
       <PlaylistModal showModal={showModalEdit} closeModal={closeModal} editable={true} playlist={parameter} schedule={schedule} />
+      <ScheduleModal showModal={showScheduleModalEdit} closeModal={closeModal} scheduleData={schedule} />
     </>
   )
 }
