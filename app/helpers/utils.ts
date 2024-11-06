@@ -13,3 +13,5 @@ export const validateUrl = (value: string | null) => {
     }
     return false;
 };
+
+export const roles = ['ministro', 'back_1', 'back_2', 'guitarra', 'baixo', 'bateria', 'teclado', 'sonoplasta']

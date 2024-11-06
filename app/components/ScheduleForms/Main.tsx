@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from 'react'
+import { roles } from '@/app/helpers/utils';
+import { useState } from 'react';
 import PlaylistF from './PlaylistForm';
-import TeamF from './TeamForm';
 import ScheduleF from './ScheduleForm';
+import TeamF from './TeamForm';
 
 interface MainFormProps {
   closeModal: () => void;
@@ -140,10 +141,6 @@ const MainForm: React.FC<MainFormProps> = ({ closeModal }) => {
 
     return payload;
   };
-
-  const roles = [
-    'ministro', 'back_1', 'back_2', 'guitarra', 'baixo', 'bateria', 'teclado', 'sonoplasta'
-  ]
 
   const formatTeam = () => {
     const payload = {
