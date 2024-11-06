@@ -3,9 +3,10 @@ import ShowPlaylistModal from "./PlaylistModal";
 
 import useSWR from 'swr';
 import { fetcher } from "../helpers/fetcher";
-import { PlaylistModel, ScheduleModel, UserModel } from "../types";
-import { PlaylistModal } from "../modals/PlaylistModal";
 import { ScheduleModal } from "../modals/EditScheduleModal";
+import { TeamScheduleModal } from "../modals/EditTeamScheduleModal";
+import { PlaylistModal } from "../modals/PlaylistModal";
+import { PlaylistModel, ScheduleModel, UserModel } from "../types";
 
 export function Schedules() {
   const [schedulesData, setSchedulesData] = useState<ScheduleModel[]>([]);
@@ -14,6 +15,7 @@ export function Schedules() {
   const [showModal, setShowModal] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [showScheduleModalEdit, setShowScheduleModalEdit] = useState(false);
+  const [showTeamModalEdit, setShowTeamModalEdit] = useState(false);
   const [parameter, setParameter] = useState<PlaylistModel | null>(null);
   const [schedule, setSchedule] = useState<ScheduleModel>(
     {
@@ -77,6 +79,7 @@ export function Schedules() {
     setShowModal(false);
     setShowModalEdit(false);
     setShowScheduleModalEdit(false);
+    setShowTeamModalEdit(false);
   };
 
   const openPlaylistModal = async (schedule: ScheduleModel) => {
@@ -103,6 +106,11 @@ export function Schedules() {
   const openScheduleModal = async (schedule1: ScheduleModel) => {
     setSchedule(schedule1);
     setShowScheduleModalEdit(true);
+  };
+
+  const openTeamModal = async (schedule1: ScheduleModel) => {
+    setSchedule(schedule1);
+    setShowTeamModalEdit(true);
   };
 
   if (error) return (
@@ -168,14 +176,14 @@ export function Schedules() {
                     </button>
                     <ul className="dropdown-menu">
                       <li><button className="dropdown-item" onClick={() => openScheduleModal(schedule)}>Alterar Escala</button></li>
+                      <li><button className="dropdown-item" onClick={() => openTeamModal(schedule)}>Alterar Equipe</button></li>
                       <li><button className="dropdown-item" onClick={() => openPlaylistModal(schedule)}>Alterar Playlist</button></li>
-                      {/* <li><a className="dropdown-item" href={`/data/playlist/${schedule.teams[0].id}`}>Alterar Equipe</a></li> */}
                     </ul>
                   </div>
                 </div>
                 <div className="row">
-                  {filterMembers(schedule.teams[0].members).map(member => (
-                    <div className="col-md" key={member.id}>
+                  {filterMembers(schedule.teams[0].members).map((member, index) => (
+                    <div className="col-md" key={`${member.id}-${index}`}>
                       <div className="card mt-2 bg-light bg-opacity-50">
                         <h5 className="card-header h-100">
                           {member.role}
@@ -196,6 +204,7 @@ export function Schedules() {
       <ShowPlaylistModal showModal={showModal} closeModal={closeModal} parameter={parameter} />
       <PlaylistModal showModal={showModalEdit} closeModal={closeModal} editable={true} playlist={parameter} schedule={schedule} />
       <ScheduleModal showModal={showScheduleModalEdit} closeModal={closeModal} scheduleData={schedule} />
+      <TeamScheduleModal showModal={showTeamModalEdit} closeModal={closeModal} scheduleData={schedule} />
     </>
   )
 }

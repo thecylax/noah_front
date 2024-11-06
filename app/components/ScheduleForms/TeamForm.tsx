@@ -1,6 +1,7 @@
 "use client";
 
 import { fetcher } from '@/app/helpers/fetcher';
+import { roles } from '@/app/helpers/utils';
 import { UserModel } from '@/app/types';
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
@@ -21,10 +22,6 @@ export default function TeamF(props: any) {
     label: user.username,
     value: user.id
   }));
-
-  const roles = [
-    'ministro', 'back_1', 'back_2', 'guitarra', 'baixo', 'bateria', 'teclado', 'sonoplasta'
-  ]
 
   return (
     <>

@@ -24,7 +24,7 @@ export function ScheduleModal({ showModal, closeModal, scheduleData }: MyModalPr
   useEffect(() => {
     if (scheduleData) {
       setSchedule(scheduleData);
-      setForm({ name: scheduleData.name, datetime: new Date(scheduleData.datetime) , local: scheduleData.local })
+      setForm({ name: scheduleData.name, datetime: new Date(scheduleData.datetime), local: scheduleData.local })
     }
   }, [scheduleData]);
 
