@@ -23,6 +23,12 @@ export async function PUT(request: NextRequest, { params }: { params: { id: numb
         },
         body: JSON.stringify(body),
     })
+    if (!res.ok) {
+        // Handle non-2xx responses
+        const errorData = await res.json();
+        return NextResponse.json(errorData, { status: res.status });
+    }
+
     const data = await res.json();
     return NextResponse.json(data)
 }

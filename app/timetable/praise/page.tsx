@@ -16,7 +16,7 @@ export default function Page() {
 
   const closeModal = () => {
     setShowModal(false);
-    setShowModal2(false);
+    // setShowModal2(false);
   };
 
   return (
@@ -34,7 +34,7 @@ export default function Page() {
       </div>
 
       <CreateScheduleModal showModal={showModal} closeModal={closeModal} />
-      <CreateScheduleModalSimplified showModal={showModal2} closeModal={closeModal} />
+      {/* <CreateScheduleModalSimplified showModal={showModal2} closeModal={closeModal} /> */}
       <Schedules />
     </>
   )
