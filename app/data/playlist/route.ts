@@ -29,9 +29,5 @@ export async function POST(request: NextRequest) {
         return NextResponse.json(errorData, {status: res.status});
     }
     const data = await res.json();
-    // console.log("---- start log da rota ----");
-    // console.log(res.status);
-    // console.log(data);
-    // console.log("---- end log da rota ----");
     return NextResponse.json(data)
 }
