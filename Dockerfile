@@ -5,7 +5,8 @@ WORKDIR /app
 RUN npm install --global pm2
 COPY ./package*.json ./
 
-RUN npm update && npm audit fix --force && npm install --production
+RUN npm install --production --force
+
 COPY ./ ./
 RUN npm run build
 EXPOSE 3000
