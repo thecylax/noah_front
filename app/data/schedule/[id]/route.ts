@@ -3,7 +3,9 @@ import { apiUrl } from 'config';
 
 const baseUrl = `${apiUrl}/schedule`;
 
-export async function GET(request: NextRequest, { params }: { params: { id: number } }) {
+type Params = Promise<{ id: number }>;
+export async function GET(request: NextRequest, context: { params: Params }) {
+    const params = await context.params
     const res = await fetch(`${baseUrl}/${params.id}`, {
         next: { revalidate: 10 },
         headers: {
@@ -14,9 +16,10 @@ export async function GET(request: NextRequest, { params }: { params: { id: numb
     return NextResponse.json(result)
 }
 
-export async function PUT(request: NextRequest, { params }: { params: { id: number } }) {
+export async function PUT(request: NextRequest, context: { params: Params }) {
     try {
         const body = await request.json()
+        const params = await context.params
         const res = await fetch(`${baseUrl}/${params.id}/`, {
             method: 'PUT',
             headers: {
@@ -37,7 +40,8 @@ export async function PUT(request: NextRequest, { params }: { params: { id: numb
     }
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: number } }) {
+export async function DELETE(request: NextRequest, context: { params: Params }) {
+    const params = await context.params
     const res = await fetch(`${baseUrl}/${params.id}/`, {
         next: { revalidate: 10 },
         method: 'DELETE',

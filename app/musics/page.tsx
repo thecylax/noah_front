@@ -6,6 +6,7 @@ import { Music } from "../components/Music"
 import { fetcher } from "../helpers/fetcher";
 import { MusicModel } from "../types";
 import CreateMusicModal from "../modals/CreateMusicModal";
+import Link from "next/link";
 
 export default function Page() {
   const { data, error, isLoading } = useSWR<any>(`/data/musics/`, fetcher);
@@ -104,7 +105,7 @@ export default function Page() {
     <MusicControlsContext.Provider value={[addMusic, removeMusic]}>
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
-          <li className="breadcrumb-item"><a className="text-light " href="/">Início</a></li>
+          <li className="breadcrumb-item"><Link className="text-light " href="/" passHref>Início</Link></li>
           <li className="breadcrumb-item text-light" aria-current="page">Louvor</li>
           <li className="breadcrumb-item active text-light" aria-current="page">Músicas</li>
         </ol>

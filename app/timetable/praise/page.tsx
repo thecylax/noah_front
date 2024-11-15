@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Schedules } from "@/app/components/Schedules"
 import CreateScheduleModal from "@/app/modals/CreateScheduleModal";
 import CreateScheduleModalSimplified from "@/app/modals/CreateScheduleModalSimplified";
+import Link from "next/link";
 
 export default function Page() {
   const [showModal, setShowModal] = useState(false);
@@ -23,7 +24,7 @@ export default function Page() {
     <>
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
-          <li className="breadcrumb-item"><a className="text-light " href="/">Início</a></li>
+          <li className="breadcrumb-item"><Link className="text-light " href="/" passHref>Início</Link></li>
           <li className="breadcrumb-item text-light" aria-current="page">Louvor</li>
           <li className="breadcrumb-item active text-light" aria-current="page">Escala</li>
         </ol>

@@ -28,7 +28,7 @@ const CreateMusicModal = ({ showModal, closeModal, musicId }: MyModalProps) => {
       setYTLink(data.youtube_link);
       setCCLink(data.cifra_link);
     }
-  }, [data, isLoading]);
+  }, [data, isLoading, musicId]);
 
   const closeModal2 = () => {
     closeModal();

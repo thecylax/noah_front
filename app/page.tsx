@@ -11,17 +11,16 @@ export default function Home() {
         </div>
         <div className="carousel-inner">
           <div className="carousel-item active">
-            {/* <Image src={"/images/foto0.png"} className='d-block w-100' width={300} height={300} alt='...'></Image> */}
-            <img src="/images/foto0.png" className="d-block w-100" alt="..." />
+            <Image src="/images/foto0.png" className='d-block w-100' width={500} height={0} style={{ height: 'auto' }} alt='...' />
           </div>
           <div className="carousel-item">
-            <img src="/images/foto1.png" className="d-block w-100" alt="..." />
+            <Image src="/images/foto1.png" className="d-block w-100" width={500} height={0} style={{ height: 'auto' }} alt="..." />
           </div>
           <div className="carousel-item">
-            <img src="/images/foto2.png" className="d-block w-100" alt="..." />
+            <Image src="/images/foto2.png" className="d-block w-100" width={500} height={0} style={{ height: 'auto' }} alt="..." />
           </div>
           <div className="carousel-item">
-            <img src="/images/foto3.png" className="d-block w-100" alt="..." />
+            <Image src="/images/foto3.png" className="d-block w-100" width={500} height={0} style={{ height: 'auto' }} alt="..." />
           </div>
         </div>
         <button className="carousel-control-prev" type="button" data-bs-target="#carouselMain" data-bs-slide="prev">

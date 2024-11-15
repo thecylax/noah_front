@@ -1,6 +1,10 @@
 FROM node:alpine
 
 WORKDIR /app
+
+RUN npm update
+RUN npm audit fix --force
+
 RUN npm install --global pm2
 COPY ./package*.json ./
 
