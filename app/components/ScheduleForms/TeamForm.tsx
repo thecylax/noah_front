@@ -16,7 +16,7 @@ export default function TeamF(props: any) {
     if (users && users.result.results) {
       setUserData(users.result.results)
     }
-  }, [data, isLoading]);
+  }, [data, isLoading, users]);
 
   const options = usersData.map((user: UserModel) => ({
     label: user.username,
