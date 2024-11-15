@@ -2,13 +2,10 @@ FROM node:alpine
 
 WORKDIR /app
 
-RUN npm update
-RUN npm audit fix --force
-
 RUN npm install --global pm2
 COPY ./package*.json ./
 
-RUN npm install --production
+RUN npm update && npm audit fix --force && npm install --production
 COPY ./ ./
 RUN npm run build
 EXPOSE 3000
