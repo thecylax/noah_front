@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 export function Footer() {
 
   return (
@@ -21,7 +23,7 @@ export function Footer() {
 
         <div className="copyright text-center p-3">
           <a className="navbar-brand" href="#">
-              <img src="/images/Logotipo_Noah_Branco.png" alt="noah" height="100"></img>
+              <Image src="/images/Logotipo_Noah_Branco.png" alt="noah" width={500} height={100} style={{ width: 'auto' }} />
           </a>
         </div>
       </div>
