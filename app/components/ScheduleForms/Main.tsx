@@ -27,6 +27,7 @@ const MainForm: React.FC<MainFormProps> = ({ closeModal }) => {
     team_members_back_1: member;
     team_members_back_2: member;
     team_members_guitarra: member;
+    team_members_violao: member;
     team_members_baixo: member;
     team_members_bateria: member;
     team_members_teclado: member;
@@ -49,6 +50,7 @@ const MainForm: React.FC<MainFormProps> = ({ closeModal }) => {
     team_members_back_1: {name: '', value: 0},
     team_members_back_2: {name: '', value: 0},
     team_members_guitarra: {name: '', value: 0},
+    team_members_violao: {name: '', value: 0},
     team_members_baixo: {name: '', value: 0},
     team_members_bateria: {name: '', value: 0},
     team_members_teclado: {name: '', value: 0},
@@ -104,6 +106,7 @@ const MainForm: React.FC<MainFormProps> = ({ closeModal }) => {
       team_members_back_1: { name: '', value: 0 },
       team_members_back_2: { name: '', value: 0 },
       team_members_guitarra: { name: '', value: 0 },
+      team_members_violao: { name: '', value: 0 },
       team_members_baixo: { name: '', value: 0 },
       team_members_bateria: { name: '', value: 0 },
       team_members_teclado: { name: '', value: 0 },
