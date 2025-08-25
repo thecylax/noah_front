@@ -44,7 +44,7 @@ export function Schedules() {
     const matchingItems = schedulesData.filter(schedule =>
       schedule.teams.some(team =>
         team.members.some(member =>
-          member.username.toLocaleLowerCase().includes(value.toLowerCase())
+          member.first_name.toLocaleLowerCase().includes(value.toLowerCase())
         )
       )
     );
@@ -58,7 +58,7 @@ export function Schedules() {
 
   const filterMembers = (members: UserModel[]): UserModel[] => {
     return members.filter(member =>
-      member.username.toLowerCase().includes(query.toLowerCase())
+      member.first_name.toLowerCase().includes(query.toLowerCase())
     );
   };
 
@@ -189,7 +189,7 @@ export function Schedules() {
                           {member.role}
                         </h5>
                         <div className="card-body">
-                          <h5 className="card-title">{member.username}</h5>
+                          <h5 className="card-title">{member.first_name}</h5>
                         </div>
                       </div>
                     </div>

@@ -19,7 +19,7 @@ export default function TeamF(props: any) {
   }, [data, isLoading, users]);
 
   const options = usersData.map((user: UserModel) => ({
-    label: user.username,
+    label: user.first_name,
     value: user.id
   }));
 

@@ -41,7 +41,7 @@ export function Team({ editable, team }: { editable: boolean, team: TeamModel })
         <div className="d-flex w-100 justify-content-evenly">
           {/* <small> */}
             {team.members.map(member => (
-              <span key={member.role} className="mt-1 badge rounded-pill text-bg-primary">{member.username}</span>
+              <span key={member.role} className="mt-1 badge rounded-pill text-bg-primary">{member.first_name}</span>
             ))}
           {/* </small> */}
         </div>

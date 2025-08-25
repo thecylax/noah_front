@@ -31,7 +31,8 @@ const MainForm: React.FC<MainFormProps> = ({ closeModal }) => {
     team_members_baixo: member;
     team_members_bateria: member;
     team_members_teclado: member;
-    team_members_sonoplasta: member;
+    team_members_sonoplasta_m: member;
+    team_members_sonoplasta_t: member;
     schedule_id: number;
     schedule_name: string;
     schedule_datetime: Date;
@@ -54,7 +55,8 @@ const MainForm: React.FC<MainFormProps> = ({ closeModal }) => {
     team_members_baixo: {name: '', value: 0},
     team_members_bateria: {name: '', value: 0},
     team_members_teclado: {name: '', value: 0},
-    team_members_sonoplasta: {name: '', value: 0},
+    team_members_sonoplasta_m: {name: '', value: 0},
+    team_members_sonoplasta_t: {name: '', value: 0},
     schedule_id: 0,
     schedule_name: "",
     schedule_datetime: new Date(),
@@ -110,7 +112,8 @@ const MainForm: React.FC<MainFormProps> = ({ closeModal }) => {
       team_members_baixo: { name: '', value: 0 },
       team_members_bateria: { name: '', value: 0 },
       team_members_teclado: { name: '', value: 0 },
-      team_members_sonoplasta: { name: '', value: 0 },
+      team_members_sonoplasta_m: { name: '', value: 0 },
+      team_members_sonoplasta_t: { name: '', value: 0 },
       schedule_id: 0,
       schedule_name: "",
       schedule_datetime: new Date(),

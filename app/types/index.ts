@@ -9,6 +9,7 @@ export interface MusicModel {
 export interface UserModel {
     id: number;
     username: string;
+    first_name: string;
     email: string;
     groups: string[];
     role: string;

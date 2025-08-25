@@ -26,7 +26,7 @@ export function TeamScheduleModal({ showModal, closeModal, scheduleData }: MyMod
       const member = members.find(m => m.role.toLowerCase().replace(' ', '_') === role);
       if (member) {
         acc[`team_members_${role}`] = {
-          label: member?.username || '',
+          label: member?.first_name || '',
           value: member?.id || 0,
         };
       } else {
@@ -54,7 +54,7 @@ export function TeamScheduleModal({ showModal, closeModal, scheduleData }: MyMod
       const member = members.find(m => m.role.toLowerCase().replace(' ', '_') === role);
       if (member) {
         acc[`team_members_${role}`] = {
-          label: member?.username || '',
+          label: member?.first_name || '',
           value: member?.id || 0,
         };
       } else {
@@ -122,6 +122,7 @@ export function TeamScheduleModal({ showModal, closeModal, scheduleData }: MyMod
   const saveSchedule = async (e: any) => {
     e.preventDefault()
     const formData = formatTeam();
+    console.log('--- chamando: ' + `/data/teams/${schedule.teams[0].id}/`);
     try {
       const res = await fetch(`/data/teams/${schedule.teams[0].id}/`, {
         method: 'PUT',
@@ -143,7 +144,7 @@ export function TeamScheduleModal({ showModal, closeModal, scheduleData }: MyMod
   }
 
   const options = usersData.map((user: UserModel) => ({
-    label: user.username,
+    label: user.first_name,
     value: user.id
   }));
 
